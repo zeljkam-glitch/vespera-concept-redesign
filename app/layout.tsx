@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Vespera namještaj — konceptualni redizajn',
+  title: 'Vespera namještaj | konceptualni redizajn',
   description: 'Koncept digitalnog salona za aktualnu ponudu, garniture i planiranje kuhinja po mjeri.',
 };
 

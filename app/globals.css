@@ -65,13 +65,14 @@ h3 { line-height: 1.18; }
 
 .hero { background: #d9d9d4; }
 .hero-grid { min-height: 650px; display: grid; grid-template-columns: 1.02fr .98fr; }
+.hero-grid > *, .kitchen-feature > *, .social-grid > *, .kitchen-hero-grid > * { min-width: 0; }
 .hero-copy { padding: clamp(62px, 8vw, 120px) max(24px, calc((100vw - 1280px) / 2)) 70px; padding-right: 7vw; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid #a9a9a3; }
 .hero-copy p:not(.eyebrow) { max-width: 640px; color: #40403c; font-size: 1.12rem; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 16px 0 28px; }
 .hero-image { min-height: 520px; position: relative; overflow: hidden; background: #bdbdb7; }
 .hero-image img { width: 100%; height: 100%; object-fit: cover; }
 .hero-badge { max-width: 390px; padding: 18px 22px; position: absolute; left: 0; bottom: 0; background: var(--accent); color: var(--ink); font-size: .9rem; font-weight: 800; }
-.hero-search { padding: 0 24px; position: relative; z-index: 4; transform: translateY(-34px); }
+.hero-search { padding: 28px 24px 36px; }
 .hero-search .search-box { margin: auto; }
 .trust-strip { margin-top: -1px; padding: 26px max(24px, calc((100vw - 1280px) / 2)); display: grid; grid-template-columns: repeat(3, 1fr); background: var(--ink); color: #fff; }
 .trust-strip > :is(div, a) { min-height: 62px; padding: 8px 28px; display: flex; align-items: center; gap: 14px; border-right: 1px solid #4d4d49; }

@@ -58,7 +58,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         heading: 'Nasloni za ruke pomažu pri ustajanju',
-        paragraphs: ['Čvrst i dobro postavljen naslon za ruke pruža oslonac. U salonu nekoliko puta sjednite i ustanite — to je korisniji test od kratkog sjedenja.'],
+        paragraphs: ['Čvrst i dobro postavljen naslon za ruke pruža oslonac. U salonu nekoliko puta sjednite i ustanite. To je korisniji test od kratkog sjedenja.'],
         points: ['Stopala stabilno na podu', 'Leđa oslonjena bez klizanja', 'Nasloni za ruke na ugodnoj visini'],
       },
     ],
