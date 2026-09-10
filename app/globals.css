@@ -70,7 +70,7 @@ h3 { line-height: 1.18; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 16px 0 28px; }
 .hero-image { min-height: 520px; position: relative; overflow: hidden; background: #bdbdb7; }
 .hero-image img { width: 100%; height: 100%; object-fit: cover; }
-.hero-badge { max-width: 310px; padding: 18px 22px; position: absolute; left: 0; bottom: 0; background: var(--accent); color: var(--ink); font-size: .9rem; font-weight: 800; }
+.hero-badge { max-width: 390px; padding: 18px 22px; position: absolute; left: 0; bottom: 0; background: var(--accent); color: var(--ink); font-size: .9rem; font-weight: 800; }
 .hero-search { padding: 0 24px; position: relative; z-index: 4; transform: translateY(-34px); }
 .hero-search .search-box { margin: auto; }
 .trust-strip { margin-top: -1px; padding: 26px max(24px, calc((100vw - 1280px) / 2)); display: grid; grid-template-columns: repeat(3, 1fr); background: var(--ink); color: #fff; }
@@ -143,6 +143,18 @@ h3 { line-height: 1.18; }
 .guide p { color: var(--muted); }
 .advice-button { margin-top: 34px; }
 
+.social-section { padding: clamp(66px, 8vw, 108px) 0; background: var(--accent); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.social-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(42px, 8vw, 110px); align-items: end; }
+.social-grid h2 { max-width: 650px; margin-bottom: 0; }
+.social-copy > p { max-width: 620px; margin-bottom: 28px; }
+.social-links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.social-links > a { min-height: 88px; padding: 16px 18px; display: grid; grid-template-columns: 30px 1fr 24px; align-items: center; gap: 14px; background: var(--white); border: 2px solid var(--ink); font-weight: 800; }
+.social-links > a:hover { background: var(--ink); color: var(--white); }
+.social-links svg { width: 27px; height: 27px; }
+.social-links span, .social-links strong, .social-links small { display: block; }
+.social-links small { margin-top: 2px; color: var(--muted); font-size: .75rem; font-weight: 650; }
+.social-links > a:hover small { color: #d7d7d0; }
+
 .salon-section { padding: clamp(76px, 9vw, 132px) 0; background: #bdbdb7; }
 .salon-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 80px; align-items: end; }
 .salon-grid h2 { max-width: 760px; }
@@ -155,6 +167,9 @@ h3 { line-height: 1.18; }
 .footer h3 { color: var(--accent); }
 .footer a { min-height: 48px; display: flex; align-items: center; color: #f5f5f2; }
 .footer p { color: #bdbdb7; }
+.footer-social { margin-top: 16px; padding-top: 14px; display: flex; flex-wrap: wrap; gap: 8px 18px; border-top: 1px solid #4d4d49; }
+.footer-social a { gap: 9px; font-weight: 760; }
+.footer-social svg { width: 21px; height: 21px; color: var(--accent); }
 .footer-note { grid-column: 1 / -1; padding-top: 24px; border-top: 1px solid #4d4d49; font-size: .8rem; }
 .sticky-nav { display: none; }
 
@@ -312,10 +327,11 @@ h3 { line-height: 1.18; }
   .brand { width: 124px; height: 55px; margin-right: auto; }
   .desktop-nav, .header-phone { display: none; }
   .mobile-menu { display: block; }
-  .hero-grid, .kitchen-feature, .salon-grid, .product-layout, .fit-card, .kitchen-hero-grid, .project-grid, .kitchen-clarity, .sale-heading { grid-template-columns: 1fr; }
+  .hero-grid, .kitchen-feature, .salon-grid, .product-layout, .fit-card, .kitchen-hero-grid, .project-grid, .kitchen-clarity, .sale-heading, .social-grid { grid-template-columns: 1fr; }
   .hero-copy { padding: 62px 20px 52px; border-right: 0; }
   .hero-copy h1 { font-size: clamp(3.2rem, 14vw, 5.4rem); }
   .hero-image { min-height: 380px; }
+  .hero-badge { max-width: calc(100% - 24px); }
   .hero-search { padding: 18px 16px 26px; transform: none; }
   .trust-strip { grid-template-columns: 1fr; padding-inline: 16px; }
   .trust-strip > :is(div, a) { border-right: 0; border-bottom: 1px solid #4d4d49; }
@@ -372,6 +388,7 @@ h3 { line-height: 1.18; }
   .project-summary div { grid-template-columns: 1fr; gap: 3px; }
   .summary-actions .button { width: 100%; }
   .hero-actions .button { width: 100%; }
+  .social-links { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

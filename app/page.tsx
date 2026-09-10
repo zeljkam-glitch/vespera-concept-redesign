@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, BedDouble, ChefHat, CirclePercent, Clock3, MapPin, PackageOpen, Phone, Ruler, ShieldCheck, Sofa, Utensils } from 'lucide-react';
+import { ArrowRight, BedDouble, Camera, ChefHat, CirclePercent, Clock3, MapPin, MessageCircle, PackageOpen, Phone, Ruler, ShieldCheck, Sofa, Utensils } from 'lucide-react';
 import { PageShell, SearchBox } from '@/components/site-chrome';
 
 const currentProducts = [
@@ -27,7 +27,7 @@ export default function Home() {
             <div className="hero-actions"><a className="button button-accent" href="#aktualno">Pogledajte akcije <ArrowRight aria-hidden="true" /></a><Link className="button button-light" href="/kuhinje">Planirajte kuhinju</Link></div>
             <a className="text-link" href="tel:+38547645535"><Phone size={20} aria-hidden="true" /> Radije biste razgovarali? 047 645 535</a>
           </div>
-          <div className="hero-image"><Image src="https://vespera.hr/wp-content/uploads/2026/06/ambijent-3-960x540.jpg" alt="Prostrana kutna garnitura u suvremenom dnevnom boravku" width={960} height={540} sizes="(max-width: 920px) 100vw, 50vw" priority /><div className="hero-badge">Salon u Karlovcu. Dođite, isprobajte i pitajte.</div></div>
+          <div className="hero-image"><Image src="https://vespera.hr/wp-content/uploads/2026/06/ambijent-3-960x540.jpg" alt="Prostrana kutna garnitura u suvremenom dnevnom boravku" width={960} height={540} sizes="(max-width: 920px) 100vw, 50vw" priority /><div className="hero-badge">Više od 20 godina pomažemo uređivati domove u Karlovcu i okolici.</div></div>
         </div>
         <div className="hero-search"><SearchBox /></div>
       </section>
@@ -56,6 +56,8 @@ export default function Home() {
         <article className="guide"><span className="number">UDOBNOST · 4 MIN</span><h3>Kako odabrati garnituru iz koje se lakše ustaje?</h3><p>Visina sjedišta, dubina i čvrstoća mogu biti važnije od samog izgleda.</p><Link className="text-link" href="/blog/lakse-ustajanje">Pročitajte vodič</Link></article>
         <article className="guide"><span className="number">KUHINJE · 6 MIN</span><h3>Što pripremiti za planiranje kuhinje po mjeri?</h3><p>Nekoliko fotografija i osnovnih mjera dovoljno je za kvalitetniji prvi razgovor.</p><Link className="text-link" href="/blog/priprema-kuhinje-po-mjeri">Pročitajte vodič</Link></article>
       </div><Link className="button advice-button" href="/blog">Pogledajte sve savjete <ArrowRight aria-hidden="true" /></Link></section>
+
+      <section className="social-section" aria-labelledby="social-title"><div className="container social-grid"><div><p className="eyebrow">Vespera na društvenim mrežama</p><h2 id="social-title">Pratite novu ponudu, akcije i realizacije.</h2></div><div className="social-copy"><p>Na Facebooku i Instagramu pogledajte što je upravo stiglo u salon, izdvojene ponude te primjere kuhinja i namještaja po mjeri.</p><div className="social-links"><a href="https://facebook.com/vesperanamjestaj" target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" /><span><strong>Facebook</strong><small>Vespera namještaj</small></span><ArrowRight aria-hidden="true" /></a><a href="https://www.instagram.com/vespera_namjestaj" target="_blank" rel="noreferrer"><Camera aria-hidden="true" /><span><strong>Instagram</strong><small>@vespera_namjestaj</small></span><ArrowRight aria-hidden="true" /></a></div></div></div></section>
 
       <section className="salon-section" id="salon-info"><div className="container salon-grid"><div><p className="eyebrow">Salon u Karlovcu</p><h2>Dođite, sjednite, otvorite, isprobajte.</h2><p>Namještaj je odluka koju je dobro osjetiti uživo. Naš tim pomoći će vam usporediti modele i potvrditi dostupnost.</p><div className="hero-actions"><a className="button button-accent" href="https://maps.google.com/?q=Matka+Laginje+1+Karlovac"><MapPin aria-hidden="true" /> Kako do salona</a><a className="button button-light" href="tel:+38547645535"><Phone aria-hidden="true" /> Nazovite salon</a></div></div><div className="salon-facts"><p><strong>Adresa</strong><span>Ul. Matka Laginje 1, Karlovac</span></p><p><strong>Telefon</strong><span>047 645 535</span></p><p><strong>Pomoć</strong><span>Od odabira do dostave i montaže</span></p></div></div></section>
     </main></PageShell>

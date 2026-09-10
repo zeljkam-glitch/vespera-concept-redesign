@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Home, MapPin, Menu, Phone, Search } from 'lucide-react';
+import { Camera, Home, MapPin, Menu, MessageCircle, Phone, Search } from 'lucide-react';
 
 export function ConceptBar() {
   return <div className="concept-bar"><span>SALTY BRAND STUDIO</span><span>Konceptualni redizajn · nije službena Vespera stranica</span></div>;
@@ -34,7 +34,7 @@ export function Footer() {
   return <footer className="footer" id="salon">
     <div><Link href="/" className="brand brand-light"><Image src="/brand/vespera-logo.png" alt="Vespera namještaj" width={480} height={480} /></Link><p>Dobar namještaj počinje dobrim savjetom.</p></div>
     <div><h3>Salon u Karlovcu</h3><p>Matka Laginje 1, 47000 Karlovac</p><a href="tel:+38547645535">047 645 535</a><a href="mailto:namjestaj@vespera.hr">namjestaj@vespera.hr</a></div>
-    <div><h3>Tu smo za pomoć</h3><Link href="/garniture">Odabir garniture</Link><Link href="/blog">Savjeti prije kupnje</Link><Link href="/kuhinje">3D planiranje kuhinje</Link></div>
+    <div><h3>Tu smo za pomoć</h3><Link href="/garniture">Odabir garniture</Link><Link href="/blog">Savjeti prije kupnje</Link><Link href="/kuhinje">3D planiranje kuhinje</Link><div className="footer-social"><a href="https://facebook.com/vesperanamjestaj" target="_blank" rel="noreferrer" aria-label="Vespera namještaj na Facebooku"><MessageCircle aria-hidden="true" /> Facebook</a><a href="https://www.instagram.com/vespera_namjestaj" target="_blank" rel="noreferrer" aria-label="Vespera namještaj na Instagramu"><Camera aria-hidden="true" /> Instagram</a></div></div>
     <p className="footer-note">Konceptualni portfolio projekt Salty Brand Studija. Sadržaj proizvoda služi za demonstraciju UX smjera.</p>
   </footer>;
 }
