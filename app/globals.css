@@ -175,6 +175,8 @@ h3 { line-height: 1.18; }
 .results-intro span { color: var(--muted); font-size: .78rem; }
 .listing-products { grid-template-columns: repeat(2, 1fr); }
 .result-note, .empty-result { margin: 0 0 28px; padding: 20px; border-left: 8px solid var(--accent); background: #fff; }
+.query-note { margin: 0 0 20px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 18px; background: #fff; border: 1px solid var(--line); }
+.query-note a { min-height: 48px; display: inline-flex; align-items: center; font-weight: 780; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 4px; }
 .empty-result { padding: 40px; }
 
 .page-intro { padding: 48px 0 30px; }
@@ -195,6 +197,7 @@ h3 { line-height: 1.18; }
 .fact span { color: var(--muted); font-size: .76rem; }
 .cta-stack { margin: 28px 0; display: grid; gap: 10px; }
 .share-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.copy-status { margin: 12px 0 0; padding: 10px 12px; background: #fff; border-left: 6px solid var(--accent); color: var(--ink); font-weight: 760; }
 .for-you { margin-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); }
 .for-you > div { padding: 25px 25px 25px 0; border-bottom: 1px solid var(--ink); }
 .for-you > div + div { padding-left: 25px; border-left: 1px solid var(--ink); }
@@ -255,6 +258,11 @@ h3 { line-height: 1.18; }
 .success-state { min-height: 460px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
 .success-state svg { padding: 8px; background: var(--accent); }
 .success-state h3 { margin: 22px 0 10px; font-size: 2rem; }
+.project-summary { width: 100%; margin: 18px 0 24px; border-top: 1px solid var(--ink); }
+.project-summary div { padding: 12px 0; display: grid; grid-template-columns: 120px 1fr; gap: 16px; border-bottom: 1px solid var(--line); }
+.project-summary dt { color: var(--muted); font-size: .82rem; font-weight: 780; }
+.project-summary dd { margin: 0; overflow-wrap: anywhere; font-weight: 720; }
+.summary-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .kitchen-clarity { padding: clamp(34px, 6vw, 70px); display: grid; grid-template-columns: 1fr 1fr; gap: 70px; background: var(--accent); }
 .clarity-list { border-top: 1px solid var(--ink); }
 .clarity-list p { margin: 0; padding: 15px 0; display: grid; grid-template-columns: 120px 1fr; border-bottom: 1px solid var(--ink); }
@@ -307,6 +315,7 @@ h3 { line-height: 1.18; }
   .guide + .guide, .for-you > div + div { padding-left: 0; border-left: 0; }
   .guide { min-height: 270px; padding-right: 0; }
   .results-intro { display: block; padding-bottom: 14px; }
+  .query-note { align-items: flex-start; flex-direction: column; gap: 4px; }
   .main-product-image { min-height: 340px; }
   .fact:nth-child(even) { padding-left: 12px; }
   .share-row .button { width: 100%; }
@@ -314,6 +323,8 @@ h3 { line-height: 1.18; }
   .kitchen-steps li, .kitchen-steps li + li { min-height: 0; padding: 20px 0; border-left: 0; }
   .kitchen-steps h3 { margin-top: 22px; }
   .clarity-list p, .salon-facts p { grid-template-columns: 1fr; gap: 4px; }
+  .project-summary div { grid-template-columns: 1fr; gap: 3px; }
+  .summary-actions .button { width: 100%; }
   .hero-actions .button { width: 100%; }
 }
 

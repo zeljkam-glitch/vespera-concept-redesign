@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Home, MapPin, Menu, Phone, Search } from 'lucide-react';
 
 export function ConceptBar() {
@@ -8,7 +9,7 @@ export function ConceptBar() {
 export function Header() {
   return <><ConceptBar /><header className="site-header">
     <Link href="/" className="brand" aria-label="Vespera namještaj, početna">
-      <img src="/brand/vespera-logo.png" alt="Vespera namještaj" />
+      <Image src="/brand/vespera-logo.png" alt="Vespera namještaj" width={480} height={480} priority />
     </Link>
     <nav className="desktop-nav" aria-label="Glavna navigacija">
       <Link href="/#aktualno">Dostupno sada</Link><Link href="/garniture">Garniture</Link><Link href="/kuhinje">Kuhinje po mjeri</Link><Link href="/#salon">Salon</Link>
@@ -22,16 +23,16 @@ export function Header() {
 }
 
 export function SearchBox() {
-  return <form className="search-box" role="search" action="/garniture">
+  return <search><form className="search-box" action="/garniture">
     <Search size={24} aria-hidden="true" /><label htmlFor="site-search" className="sr-only">Što tražite?</label>
     <input id="site-search" name="q" type="search" placeholder="Npr. manja garnitura sa spremnikom" />
     <button type="submit">Traži</button>
-  </form>;
+  </form></search>;
 }
 
 export function Footer() {
   return <footer className="footer" id="salon">
-    <div><Link href="/" className="brand brand-light"><img src="/brand/vespera-logo.png" alt="Vespera namještaj" /></Link><p>Namještaj za život kakav stvarno živite.</p></div>
+    <div><Link href="/" className="brand brand-light"><Image src="/brand/vespera-logo.png" alt="Vespera namještaj" width={480} height={480} /></Link><p>Namještaj za život kakav stvarno živite.</p></div>
     <div><h3>Salon u Karlovcu</h3><p>Matka Laginje 1, 47000 Karlovac</p><a href="tel:+38547645535">047 645 535</a><a href="mailto:namjestaj@vespera.hr">namjestaj@vespera.hr</a></div>
     <div><h3>Tu smo za pomoć</h3><Link href="/garniture">Odabir garniture</Link><Link href="/#vodici">Vodiči prije kupnje</Link><Link href="/kuhinje">3D planiranje kuhinje</Link></div>
     <p className="footer-note">Konceptualni portfolio projekt Salty Brand Studija. Sadržaj proizvoda služi za demonstraciju UX smjera.</p>
