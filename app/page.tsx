@@ -31,8 +31,8 @@ export default function Home() {
         <div className="hero-search"><SearchBox /></div>
       </section>
 
-      <section className="trust-strip" aria-label="Prednosti Vespere">
-        <div><ShieldCheck aria-hidden="true" /><span><strong>Osobno savjetovanje</strong> u salonu</span></div><div><Ruler aria-hidden="true" /><span><strong>3D planiranje</strong> kuhinje</span></div><div><Clock3 aria-hidden="true" /><span><strong>Status dostupnosti</strong> prije dolaska</span></div>
+      <section className="trust-strip" aria-label="Prednosti i brze radnje">
+        <div><ShieldCheck aria-hidden="true" /><span><strong>Osobno savjetovanje</strong> u salonu</span></div><div><Ruler aria-hidden="true" /><span><strong>3D planiranje</strong> kuhinje</span></div><a className="trust-call" href="tel:+38547645535"><Clock3 aria-hidden="true" /><span><strong>Provjerite dostupnost</strong> Nazovite 047 645 535</span></a>
       </section>
 
       <section className="section container" id="kategorije"><div className="section-head"><div><p className="eyebrow">Krenite od svoje potrebe</p><h2>Što želite riješiti?</h2></div><p>Ne morate znati naziv kolekcije ili proizvođača. Dovoljno je znati što treba bolje funkcionirati u vašem domu.</p></div>
