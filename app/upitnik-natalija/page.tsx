@@ -29,6 +29,10 @@ type Section = {
   eyebrow: string;
   title: string;
   intro: string;
+  note?: {
+    title: string;
+    items: string[];
+  };
   questions: Question[];
 };
 
@@ -168,10 +172,28 @@ const sections: Section[] = [
     eyebrow: '10 Održavanje i završetak projekta',
     title: 'Tko će web održavati živim?',
     intro: 'Najbolji dizajn neće pomoći ako cijene, fotografije i dostupnost ostanu zastarjeli. Završavamo jasnim vlasništvom nad svakim zadatkom.',
+    note: {
+      title: 'Kako će vlasništvo nad webom funkcionirati?',
+      items: [
+        'Postojeća domena vespera.hr ostaje u vlasništvu Vespere. Za novi web obično ne selimo domenu, nego mijenjamo samo zapise koji web povezuju s novom platformom.',
+        'Kod weba čuva se u privatnom GitHub projektu, a Vercel ga objavljuje. Računi trebaju biti pod kontrolom Vespere, dok Salty Brand Studio dobiva samo suradnički pristup potreban za rad.',
+        'Natalija ne treba nikome slati lozinke. Ona ili druga ovlaštena osoba zadržava pristup e-mailu za oporavak, broj mobitela, dvostruku zaštitu računa i pričuvne kodove.',
+        'Prije promjene postavki domene spremamo postojeće zapise kako bismo zaštitili poslovni e-mail i druge povezane usluge.',
+        'GitHub račun može biti bez naknade. Vercelova besplatna opcija namijenjena je osobnoj i nekomercijalnoj uporabi, pa za konačni poslovni web prije objave biramo odgovarajući komercijalni plan ili drugi hosting.',
+        'Nova domena kupuje se samo ako Vespera želi novu adresu. Za .hr domenu usporedit ćemo ovlaštene hrvatske registrare i trošak obnove. GoDaddy je moguća opcija za neke nastavke, ali nije nužan.',
+      ],
+    },
     questions: [
       { id: 'content_owner', label: 'Tko će u Vesperi javljati nove proizvode, cijene i promjene dostupnosti?', type: 'short', key: true },
       { id: 'update_frequency', label: 'Koliko često realno možemo ažurirati aktualnu ponudu?', type: 'select', options: ['Svaki dan', 'Jednom tjedno', 'Dva puta mjesečno', 'Jednom mjesečno', 'Samo kada netko pošalje promjenu'], key: true },
       { id: 'cms_choice', label: 'Želi li Natalija sama uređivati sadržaj ili da ažuriranja vodi Salty Brand Studio?', type: 'select', options: ['Želim sama uređivati', 'Želim jednostavan obrazac ili tablicu za unos', 'Želim da Salty vodi ažuriranja', 'Trebam preporuku'], key: true },
+      { id: 'production_domain', label: 'Želite li da konačni novi web koristi postojeću domenu vespera.hr?', help: 'Domena već postoji. Trebamo potvrditi da je to adresa koju želite zadržati za novi web.', type: 'select', options: ['Da, želimo zadržati vespera.hr', 'Želimo i dodatnu domenu', 'Razmišljamo o novoj domeni', 'Trebamo preporuku'], key: true },
+      { id: 'domain_management', label: 'Znate li gdje se upravlja domenom vespera.hr i tko ima pristup tom računu?', help: 'Dovoljni su naziv registrara ili pružatelja usluge i ime kontaktne osobe. Nemojte ovdje upisivati lozinku.', type: 'long', key: true },
+      { id: 'domain_connection', label: 'Može li osoba koja upravlja domenom dodati potrebne zapise ili Saltyju dati siguran, ograničen pristup?', help: 'Najsigurnije je da vlasnik računa sam potvrdi promjenu ili pošalje poziv za suradnju. Lozinka se ne šalje e-mailom ni kroz ovaj upitnik.', type: 'select', options: ['Da, možemo dodati zapise prema uputama', 'Da, možemo dati ograničen pristup', 'Moramo kontaktirati sadašnjeg pružatelja usluge', 'Ne znamo tko ima pristup'], key: true },
+      { id: 'domain_renewal', label: 'Tko je odgovoran za obnovu domene i je li uključena automatska obnova?', help: 'Trebamo potvrditi kontakt, datum isteka i način plaćanja kako domena ne bi slučajno istekla.', type: 'long' },
+      { id: 'project_account_email', label: 'Koja Vesperina e-mail adresa treba biti vlasnik novih GitHub i Vercel računa?', help: 'Najbolja je posebna adresa pod kontrolom Vespere, primjerice web@vespera.hr. Ako to nije moguće, Natalija može otvoriti poseban Gmail samo za digitalnu imovinu Vespere.', type: 'short', key: true },
+      { id: 'account_security_owner', label: 'Tko će u Vesperi čuvati pristup tom e-mailu, dvostruku zaštitu i pričuvne kodove?', help: 'Ta osoba ostaje stvarni vlasnik računa. Salty Brand Studio dobiva vlastiti poziv za suradnju i ne treba Vesperinu lozinku.', type: 'short', key: true },
+      { id: 'hosting_choice', label: 'Želite li prije konačne objave usporediti cijenu Vercelova poslovnog plana s drugim sigurnim hosting opcijama?', help: 'Prototip može ostati na testnoj adresi bez dodatnog troška, ali produkcijski poslovni web treba koristiti plan koji dopušta komercijalnu uporabu.', type: 'select', options: ['Da, želim jasnu usporedbu', 'Želim ostati na Vercelu', 'Želim najpovoljniju prikladnu opciju', 'Trebam preporuku'], key: true },
       { id: 'integrations', label: 'Koje postojeće alate i račune Vespera već koristi?', help: 'Domena, hosting, poslovni e-mail, Google profil, Analytics, kalendar, skladišna evidencija ili računovodstveni program.', type: 'long' },
       { id: 'legal_materials', label: 'Postoje li aktualni uvjeti kupnje, privatnost, kolačići, reklamacije, jamstva i informacije o dostavi?', type: 'long' },
       { id: 'approvals', label: 'Tko konačno odobrava logotip, tekstove, cijene, fotografije i objavu weba?', type: 'short', key: true },
@@ -189,7 +211,8 @@ const preparationItems = [
   'Podaci o kuhinjama po mjeri, rokovima, mjerenju i 3D planiranju',
   'Primjeri završenih kuhinja i dopuštenja kupaca za objavu',
   'Provjerljive recenzije i njihove poveznice ili dopuštenja',
-  'Pristupi domeni, hostingu, Google Business profilu i analitici',
+  'Podaci o vlasniku domene, registraru, obnovi i osobi koja sigurno upravlja pristupima',
+  'Vesperina e-mail adresa za vlasništvo nad GitHubom, hostingom, Google Business profilom i analitikom',
   'Aktualni pravni tekstovi i osoba koja potvrđuje prikaz cijena',
 ];
 
@@ -340,6 +363,15 @@ export default function NatalijaQuestionnairePage() {
                   <h2>{section.title}</h2>
                   <p>{section.intro}</p>
                 </div>
+                {section.note && (
+                  <aside className="question-section-note">
+                    <Lightbulb aria-hidden="true" />
+                    <div>
+                      <h3>{section.note.title}</h3>
+                      <ul>{section.note.items.map((item) => <li key={item}>{item}</li>)}</ul>
+                    </div>
+                  </aside>
+                )}
                 <div className="question-list">
                   {section.questions.map((question, index) => (
                     <label className="question-field" key={question.id}>

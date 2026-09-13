@@ -488,6 +488,12 @@ h3 { line-height: 1.18; }
 .question-section-head { padding: clamp(28px, 5vw, 54px); border-bottom: 1px solid var(--ink); }
 .question-section-head h2 { max-width: 780px; font-size: clamp(2.3rem, 5vw, 4.7rem); }
 .question-section-head > p:last-child { max-width: 66ch; margin-bottom: 0; color: var(--muted); }
+.question-section-note { margin: clamp(24px, 4vw, 42px) clamp(24px, 5vw, 52px) 0; padding: clamp(22px, 4vw, 34px); display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 16px; background: #fff8c9; border: 2px solid var(--ink); }
+.question-section-note > svg { width: 32px; height: 32px; }
+.question-section-note h3 { margin: 0 0 16px; font-size: 1.25rem; }
+.question-section-note ul { margin: 0; padding-left: 22px; }
+.question-section-note li { margin-top: 10px; line-height: 1.55; }
+.question-section-note li:first-child { margin-top: 0; }
 .question-list { padding: 0 clamp(24px, 5vw, 52px); }
 .question-field { padding: 30px 0 34px; display: block; border-bottom: 1px solid var(--line); }
 .question-field:last-child { border-bottom: 0; }
@@ -541,6 +547,7 @@ h3 { line-height: 1.18; }
   .questionnaire-intro-note { grid-template-columns: 1fr; }
   .questionnaire-progress nav { grid-template-columns: 1fr 1fr; }
   .question-section-head, .question-list { padding-inline: 20px; }
+  .question-section-note { margin-inline: 20px; grid-template-columns: 1fr; }
   .question-label { grid-template-columns: 30px 1fr; }
   .question-label em { grid-column: 2; width: fit-content; }
   .question-field > small, .question-field input, .question-field textarea, .question-field select { width: calc(100% - 42px); margin-left: 42px; }
