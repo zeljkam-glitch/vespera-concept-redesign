@@ -147,8 +147,25 @@ const sections: Section[] = [
     ],
   },
   {
+    id: 'dodatna-podrska',
+    eyebrow: '09 Dodatna podrška',
+    title: 'Što bi Vesperi još olakšalo posao?',
+    intro: 'Ova pitanja nisu obveza niti automatska ponuda. Pomažu nam razumjeti što bi vam moglo biti korisno sada, kasnije ili uopće nije prioritet. Odgovor „ne sada” potpuno je u redu.',
+    questions: [
+      { id: 'additional_interest', label: 'Osim novog weba, postoji li područje za koje biste voljeli barem čuti prijedlog?', type: 'select', options: ['Da, voljela bih vidjeti mogućnosti', 'Možda kasnije', 'Trenutačno mi je dovoljan web', 'Nisam sigurna, trebam preporuku'], key: true },
+      { id: 'photo_support', label: 'Bi li Vesperi koristilo profesionalno fotografiranje salona, tima, proizvoda ili realiziranih kuhinja?', type: 'select', options: ['Da, zanima me', 'Možda u kasnijoj fazi', 'Imamo dovoljno kvalitetnih fotografija', 'Ne sada'] },
+      { id: 'social_support', label: 'Želite li pomoć s planom i sadržajem za Instagram i Facebook?', help: 'To može biti samo početni plan i predlošci, povremena pomoć ili redovito vođenje.', type: 'select', options: ['Da, želim redovitu podršku', 'Da, želim početni plan i predloške', 'Možda povremeno', 'Ne, vodimo samostalno'] },
+      { id: 'google_support', label: 'Bi li vam koristilo urediti Google Business profil i jednostavnije prikupljati vjerodostojne recenzije kupaca?', type: 'select', options: ['Da, zanima me', 'Možda kasnije', 'To već dobro funkcionira', 'Ne sada'] },
+      { id: 'content_support', label: 'Razmišljate li o redovitom blogu ili kratkim savjetima koji kupcima olakšavaju izbor?', type: 'select', options: ['Da, želim redoviti sadržaj', 'Da, ali samo povremeno', 'Želim prvo nekoliko osnovnih vodiča', 'Ne sada'] },
+      { id: 'sales_materials_support', label: 'Trebaju li Vesperi i usklađeni materijali za salon i prodaju?', help: 'Na primjer cjenici, kartice proizvoda, katalog, oznake za akcije ili predlošci za društvene mreže.', type: 'select', options: ['Da, to bi nam koristilo', 'Možda samo neki materijali', 'Možda kasnije', 'Ne sada'] },
+      { id: 'advertising_support', label: 'Biste li nakon dovršetka weba željeli razgovarati o Google ili Meta oglašavanju?', type: 'select', options: ['Da, nakon što web bude spreman', 'Možda kasnije', 'Već imamo podršku za oglašavanje', 'Ne sada'] },
+      { id: 'ongoing_support', label: 'Nakon objave weba, biste li radije sami unosili promjene ili imali podršku Salty Brand Studija?', type: 'select', options: ['Želim redovitu mjesečnu podršku', 'Želim povremenu podršku po potrebi', 'Želim naučiti uređivati samostalno', 'Još ne znam'], key: true },
+      { id: 'other_support', label: 'Postoji li još nešto što bi vam olakšalo prodaju ili komunikaciju s kupcima?', type: 'long' },
+    ],
+  },
+  {
     id: 'operativa',
-    eyebrow: '09 Održavanje i završetak projekta',
+    eyebrow: '10 Održavanje i završetak projekta',
     title: 'Tko će web održavati živim?',
     intro: 'Najbolji dizajn neće pomoći ako cijene, fotografije i dostupnost ostanu zastarjeli. Završavamo jasnim vlasništvom nad svakim zadatkom.',
     questions: [
@@ -294,11 +311,11 @@ export default function NatalijaQuestionnairePage() {
             <p className="eyebrow">Razgovor s vlasnicom Vespere</p>
             <h1>Upitnik za dovršetak projekta.</h1>
             <p>Ovaj razgovor pretvara koncept u web koji odgovara stvarnom načinu prodaje, naručivanja i rada Vespere.</p>
-            <div className="questionnaire-meta"><span>9 tema</span><span>{allQuestions.length} pitanja</span><span>60 do 90 minuta</span></div>
+            <div className="questionnaire-meta"><span>{sections.length} tema</span><span>{allQuestions.length} pitanja</span><span>60 do 90 minuta</span></div>
           </div>
           <aside className="questionnaire-intro-note">
             <Lightbulb aria-hidden="true" />
-            <div><strong>Kako koristiti upitnik</strong><p>Željka vodi razgovor, a odgovore upisuje ovdje. Nacrt se automatski čuva samo u ovom pregledniku. Ništa se ne šalje Vesperi niti Saltyju.</p></div>
+            <div><strong>Kako koristiti upitnik</strong><p>Željka vodi razgovor, a odgovore upisuje ovdje. Nacrt se automatski čuva samo u ovom pregledniku. Odgovori se šalju tek kada na kraju pritisnete gumb za slanje.</p></div>
           </aside>
         </section>
 
