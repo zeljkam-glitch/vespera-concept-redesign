@@ -9,7 +9,9 @@ import {
   ExternalLink,
   FileCheck2,
   Lightbulb,
+  LoaderCircle,
   Printer,
+  Send,
 } from 'lucide-react';
 import { ConceptBar } from '@/components/site-chrome';
 
@@ -37,6 +39,8 @@ const sections: Section[] = [
     title: 'Što novi web treba postići?',
     intro: 'Prvo dogovaramo poslovni rezultat. Tek onda odlučujemo koje stranice i alati imaju smisla.',
     questions: [
+      { id: 'respondent_name', label: 'Ime i prezime osobe koja ispunjava upitnik', type: 'short', key: true },
+      { id: 'respondent_email', label: 'E-mail za eventualna dodatna pitanja', type: 'short' },
       { id: 'main_goal', label: 'Koji je najvažniji rezultat novog weba u sljedećih 12 mjeseci?', help: 'Više dolazaka u salon, više upita za kuhinje, više prodaje akcijskih proizvoda ili nešto četvrto?', type: 'long', key: true },
       { id: 'priority_categories', label: 'Koje tri kategorije donose najviše prihoda ili imaju najveći potencijal?', type: 'long', key: true },
       { id: 'business_difference', label: 'Zašto kupci odaberu Vesperu umjesto velikog lanca ili online trgovine?', type: 'long', key: true },
@@ -178,6 +182,10 @@ const storageKey = 'vespera-natalija-questionnaire';
 export default function NatalijaQuestionnairePage() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [copyStatus, setCopyStatus] = useState('');
+  const [sendStatus, setSendStatus] = useState('');
+  const [isSending, setIsSending] = useState(false);
+  const [consent, setConsent] = useState(false);
+  const [website, setWebsite] = useState('');
 
   useEffect(() => {
     const restore = () => {
@@ -205,6 +213,7 @@ export default function NatalijaQuestionnairePage() {
       return next;
     });
     setCopyStatus('');
+    setSendStatus('');
   }
 
   function buildSummary() {
@@ -229,6 +238,46 @@ export default function NatalijaQuestionnairePage() {
       setCopyStatus('Odgovori su kopirani. Možete ih zalijepiti u dokument ili poruku.');
     } catch {
       setCopyStatus('Kopiranje nije uspjelo. Upotrijebite ispis i spremite stranicu kao PDF.');
+    }
+  }
+
+  async function sendSummary() {
+    if (website) return;
+    if (!consent) {
+      setSendStatus('Prije slanja potvrdite da pristajete poslati odgovore Salty Brand Studiju.');
+      return;
+    }
+    if (!answers.respondent_name?.trim()) {
+      setSendStatus('Upišite ime i prezime osobe koja šalje odgovore.');
+      document.getElementById('ciljevi')?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+
+    setIsSending(true);
+    setSendStatus('Šaljem odgovore...');
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/hello@saltybrandstudio.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: `Vespera upitnik, ${answers.respondent_name}`,
+          _cc: 'zeljka.mikulcic.samobor@gmail.com',
+          _template: 'table',
+          _honey: website,
+          'Ispunila osoba': answers.respondent_name,
+          'Kontakt e-mail': answers.respondent_email || 'Nije naveden',
+          'Datum slanja': new Intl.DateTimeFormat('hr-HR', { dateStyle: 'long', timeStyle: 'short' }).format(new Date()),
+          'Odgovori na upitnik': buildSummary(),
+          'Izvor': 'Vespera konceptualni redizajn, Salty Brand Studio',
+        }),
+      });
+      const data = await response.json().catch(() => null);
+      if (!response.ok || data?.success === false || data?.success === 'false') throw new Error('Slanje nije potvrđeno.');
+      setSendStatus('Odgovori su poslani na obje Salty Brand Studio adrese. Lokalna kopija ostaje spremljena u ovom pregledniku.');
+    } catch {
+      setSendStatus('Slanje trenutačno nije uspjelo. Odgovori nisu izgubljeni. Kopirajte ih ili pokušajte ponovno.');
+    } finally {
+      setIsSending(false);
     }
   }
 
@@ -285,7 +334,7 @@ export default function NatalijaQuestionnairePage() {
                           {question.options?.map((option) => <option key={option}>{option}</option>)}
                         </select>
                       ) : question.type === 'short' ? (
-                        <input type="text" value={answers[question.id] ?? ''} onChange={(event) => updateAnswer(question.id, event.target.value)} />
+                        <input type={question.id === 'respondent_email' ? 'email' : 'text'} autoComplete={question.id === 'respondent_name' ? 'name' : question.id === 'respondent_email' ? 'email' : undefined} value={answers[question.id] ?? ''} onChange={(event) => updateAnswer(question.id, event.target.value)} />
                       ) : (
                         <textarea rows={4} value={answers[question.id] ?? ''} onChange={(event) => updateAnswer(question.id, event.target.value)} />
                       )}
@@ -303,12 +352,18 @@ export default function NatalijaQuestionnairePage() {
             <section className="questionnaire-finish">
               <FileCheck2 aria-hidden="true" />
               <div><p className="eyebrow">Nakon razgovora</p><h2>Pretvorite odgovore u radni brief.</h2><p>Kopirajte sažetak u svoj projektni dokument. Neodgovorena pitanja ostat će jasno označena kako ništa važno ne bi nestalo.</p></div>
+              <div className="questionnaire-consent">
+                <label><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} /><span>Potvrđujem da želim poslati unesene odgovore na <strong>hello@saltybrandstudio.com</strong> i <strong>zeljka.mikulcic.samobor@gmail.com</strong>.</span></label>
+                <p>Odgovore za dostavu obrađuje FormSubmit. Servis navodi da zadržava prijave do 30 dana. Nemojte upisivati lozinke, brojeve kartica ni druge osjetljive podatke.</p>
+                <label className="questionnaire-honey" aria-hidden="true">Ostavite prazno<input type="text" tabIndex={-1} autoComplete="off" value={website} onChange={(event) => setWebsite(event.target.value)} /></label>
+              </div>
               <div className="questionnaire-actions">
-                <button className="button button-accent" type="button" onClick={copySummary}><Clipboard aria-hidden="true" /> Kopirajte odgovore</button>
+                <button className="button button-accent" type="button" onClick={sendSummary} disabled={isSending}>{isSending ? <LoaderCircle className="sending-icon" aria-hidden="true" /> : <Send aria-hidden="true" />}{isSending ? 'Šaljem odgovore' : 'Pošaljite odgovore Željki'}</button>
+                <button className="button button-light" type="button" onClick={copySummary}><Clipboard aria-hidden="true" /> Kopirajte odgovore</button>
                 <button className="button button-light" type="button" onClick={() => window.print()}><Printer aria-hidden="true" /> Ispišite ili spremite PDF</button>
                 <Link className="button button-ghost" href="/"><ExternalLink aria-hidden="true" /> Otvorite Vespera koncept</Link>
               </div>
-              {copyStatus && <output className="copy-status" aria-live="polite">{copyStatus}</output>}
+              {(sendStatus || copyStatus) && <output className="copy-status" aria-live="polite">{sendStatus || copyStatus}</output>}
             </section>
           </form>
         </div>

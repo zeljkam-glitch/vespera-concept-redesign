@@ -508,8 +508,17 @@ h3 { line-height: 1.18; }
 .questionnaire-finish .eyebrow { color: #cfcfc9; }
 .questionnaire-finish h2 { max-width: 760px; font-size: clamp(2.2rem, 5vw, 4rem); }
 .questionnaire-finish p:not(.eyebrow) { max-width: 64ch; color: #cfcfc9; }
-.questionnaire-actions, .questionnaire-finish .copy-status { grid-column: 2; }
+.questionnaire-consent, .questionnaire-actions, .questionnaire-finish .copy-status { grid-column: 2; }
+.questionnaire-consent { padding: 18px; background: #302f2c; border: 1px solid #666660; }
+.questionnaire-consent > label:not(.questionnaire-honey) { display: grid; grid-template-columns: 24px 1fr; align-items: start; gap: 12px; cursor: pointer; }
+.questionnaire-consent input[type='checkbox'] { width: 22px; height: 22px; margin: 3px 0 0; accent-color: var(--accent); }
+.questionnaire-consent span { color: #fff; }
+.questionnaire-consent p { margin: 12px 0 0 36px !important; color: #cfcfc9 !important; font-size: .75rem; }
+.questionnaire-honey { width: 1px; height: 1px; position: absolute; left: -10000px; overflow: hidden; }
 .questionnaire-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.questionnaire-actions button:disabled { opacity: .72; cursor: wait; }
+.sending-icon { animation: questionnaire-spin 1s linear infinite; }
+@keyframes questionnaire-spin { to { transform: rotate(360deg); } }
 .questionnaire-finish .button-light { border-color: #fff; }
 .questionnaire-finish .button-ghost { border-color: #aaa; color: #fff; }
 .questionnaire-finish .button-ghost:hover { background: #fff; color: var(--ink); }
@@ -536,7 +545,8 @@ h3 { line-height: 1.18; }
   .question-label em { grid-column: 2; width: fit-content; }
   .question-field > small, .question-field input, .question-field textarea, .question-field select { width: calc(100% - 42px); margin-left: 42px; }
   .questionnaire-finish { grid-template-columns: 1fr; }
-  .questionnaire-actions, .questionnaire-finish .copy-status { grid-column: 1; }
+  .questionnaire-consent, .questionnaire-actions, .questionnaire-finish .copy-status { grid-column: 1; }
+  .questionnaire-consent p { margin-left: 0 !important; }
   .questionnaire-actions .button { width: 100%; }
 }
 
