@@ -9,6 +9,8 @@ import { roomLinks } from '@/lib/products';
 export default function Home() {
   return (
     <PageShell><main>
+      <PromoShowcase />
+
       <section className="hero">
         <div className="hero-grid">
           <div className="hero-copy"><p className="eyebrow">Salon namještaja u Karlovcu od 2008.</p><h1>Dobar namještaj počinje dobrim savjetom.</h1><p>Posjetite salon, isprobajte proizvode i razgovarajte s ljudima koji znaju pomoći.</p>
@@ -25,8 +27,6 @@ export default function Home() {
         <div><Truck aria-hidden="true" /><span><strong>Dostava i montaža</strong> prema dogovoru</span></div>
         <a className="trust-call" href="tel:+38547645535"><Clock3 aria-hidden="true" /><span><strong>Provjera dostupnosti</strong> 047 645 535</span></a>
       </section>
-
-      <PromoShowcase />
 
       <section className="section container" id="kategorije">
         <div className="section-head"><div><p className="eyebrow">Namještaj po prostorijama</p><h2>Što danas uređujete?</h2></div><p>Krenite od prostorije, a zatim suzite izbor prema dimenzijama, cijeni i dostupnosti.</p></div>
