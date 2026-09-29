@@ -145,9 +145,9 @@ const sections: Section[] = [
       { id: 'sales_model', label: 'Što kupac treba moći napraviti online?', type: 'select', options: ['Pregledati ponudu i nazvati', 'Poslati upit ili rezervirati proizvod', 'Rezervirati termin', 'Kupiti i platiti online', 'Kombinacija navedenog'], key: true },
       { id: 'saved_compare', label: 'Želite li spremanje i usporedbu proizvoda bez korisničkog računa?', type: 'select', options: ['Da', 'Možda kasnije', 'Ne'] },
       { id: 'kitchen_booking', label: 'Želite li stvarno online rezerviranje termina za kuhinje?', type: 'select', options: ['Da, s kalendarom slobodnih termina', 'Da, kao zahtjev koji Vespera naknadno potvrđuje', 'Ne, dovoljan je poziv ili običan obrazac'], key: true },
-      { id: 'channels', label: 'Koji kontaktni kanali trebaju biti vidljivi?', help: 'Telefon, e-mail, WhatsApp, Facebook Messenger, Instagram ili obrazac.', type: 'long' },
+      { id: 'channels', label: 'Koji kontaktni kanali trebaju biti vidljivi?', help: 'Telefon, e-mail, Facebook Messenger, Instagram ili obrazac.', type: 'long' },
       { id: 'catalog', label: 'Želite li digitalni katalog ili stranicu aktualne ponude koja se redovito mijenja?', type: 'long' },
-      { id: 'notifications', label: 'Ima li smisla ponuditi obavijest kada stigne novi proizvod ili nova akcija?', type: 'select', options: ['Da, e-mailom', 'Da, WhatsAppom uz privolu', 'Možda kasnije', 'Ne'] },
+      { id: 'notifications', label: 'Ima li smisla ponuditi obavijest kada stigne novi proizvod ili nova akcija?', type: 'select', options: ['Da, e-mailom', 'Možda kasnije', 'Ne'] },
     ],
   },
   {

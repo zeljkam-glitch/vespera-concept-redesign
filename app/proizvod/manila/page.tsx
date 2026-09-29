@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, Check, Heart, MapPin, MessageCircle, Phone, Share2, Truck } from 'lucide-react';
+import { ArrowLeft, Check, Heart, Mail, MapPin, Phone, Share2, Truck } from 'lucide-react';
 import { PageShell } from '@/components/site-chrome';
 
 export default function ManilaPage() {
@@ -29,7 +29,7 @@ export default function ManilaPage() {
       <div className="product-info"><p className="eyebrow">Kutna garnitura · za manji prostor</p><h1>Manila</h1><p className="availability">Nazovite salon za potvrdu dostupnosti</p><div className="product-price"><span>Redovna cijena <s>1.440,00 €</s> · ušteda 20%</span><strong>1.152,00 €</strong></div><p>Ravne linije, pomoćni ležaj i spremnik za posteljinu u dimenzijama prikladnima za manji dnevni boravak.</p>
         <div className="key-facts"><div className="fact"><span>Ukupne dimenzije</span><strong>240 × 175 × 95 cm</strong></div><div className="fact"><span>Ležaj</span><strong>200 × 160 cm</strong></div><div className="fact"><span>Odlaganje</span><strong>Spremnik za posteljinu</strong></div><div className="fact"><span>Izvedba</span><strong>Više boja i tkanina</strong></div></div>
         <div className="cta-stack"><a className="button button-accent" href="tel:+38547645535"><Phone/> Provjerite dostupnost</a><button className="button button-light" type="button" aria-pressed={isSaved} onClick={toggleSaved}>{isSaved ? <Check aria-hidden="true" /> : <Heart aria-hidden="true" />}{isSaved ? 'Spremljeno za razgovor' : 'Spremite za razgovor'}</button><a className="button button-light" href="https://maps.google.com/?q=Matka+Laginje+1+Karlovac"><MapPin/> Kako do salona</a></div>
-        <div className="share-row"><a className="button button-ghost" href="https://wa.me/?text=Kutna%20garnitura%20Manila%3A%20https%3A%2F%2Fvespera-concept-redesign.vercel.app%2Fproizvod%2Fmanila" target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true"/> Pošaljite na WhatsApp</a><button className="button button-ghost" type="button" onClick={copyLink}><Share2 aria-hidden="true"/> Kopirajte poveznicu</button></div>{copyStatus && <output className="copy-status" aria-live="polite">{copyStatus}</output>}
+        <div className="share-row"><a className="button button-ghost" href="mailto:namjestaj@vespera.hr?subject=Upit%20za%20garnituru%20Manila&body=Zanima%20me%20kutna%20garnitura%20Manila.%20Molim%20informacije%20o%20dostupnosti%2C%20izvedbama%20i%20roku%20isporuke."><Mail aria-hidden="true"/> Pošaljite upit e-mailom</a><button className="button button-ghost" type="button" onClick={copyLink}><Share2 aria-hidden="true"/> Kopirajte poveznicu</button></div>{copyStatus && <output className="copy-status" aria-live="polite">{copyStatus}</output>}
       </div>
     </section>
 

@@ -433,7 +433,6 @@ h3 { line-height: 1.18; }
 .anchor-price small { margin-top: 4px; color: var(--muted); font-size: .68rem; }
 .product-card-link { height: 100%; display: block; }
 .product-card-link .text-link { width: fit-content; }
-.whatsapp-link { margin-top: 16px; }
 
 .kitchen-price-anchor { margin: 25px 0 8px; padding: 16px 0; display: grid; border-top: 1px solid #575752; border-bottom: 1px solid #575752; }
 .kitchen-price-anchor span { color: #cfcfc9; font-size: .78rem; font-weight: 800; text-transform: uppercase; }
