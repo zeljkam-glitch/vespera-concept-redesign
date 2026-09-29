@@ -512,10 +512,10 @@ h3 { line-height: 1.18; }
   .footer { grid-template-columns: 1fr; padding-inline: 22px; }
   .footer > div:nth-child(2) { order: 1; }
   .footer > div:nth-child(3) { order: 2; }
-  .footer-payments { grid-column: auto; margin-inline: -22px; padding-inline: 22px; grid-template-columns: 1fr; order: 3; }
+  .footer-payments { grid-column: auto; margin-inline: -22px; padding-inline: 22px; grid-template-columns: 1fr; order: 4; }
   .footer-legal { padding: 24px 0 0; border-top: 1px solid #777772; border-left: 0; }
   .payment-logos { justify-content: flex-start; }
-  .footer > div:first-child { order: 4; padding-top: 12px; border-top: 1px solid #4d4d49; }
+  .footer > div:first-child { order: 3; padding-top: 12px; border-top: 1px solid #4d4d49; }
   .footer-note { grid-column: auto; order: 5; }
   .sticky-nav { height: 76px; display: grid; grid-template-columns: repeat(4, 1fr); position: fixed; z-index: 50; left: 0; right: 0; bottom: 0; background: #fff; border-top: 1px solid #777; box-shadow: 0 -5px 18px rgba(0,0,0,.12); }
   .sticky-nav a { min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: .72rem; font-weight: 780; }
