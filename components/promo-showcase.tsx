@@ -9,7 +9,7 @@ const slides = [
   {
     eyebrow: 'Akcije svaki mjesec',
     title: 'Prvo pogledajte što je sada povoljnije.',
-    copy: 'Izdvojene ponude, jasne prethodne cijene i provjera dostupnosti prije dolaska.',
+    copy: 'Izdvojene ponude, jasno prikazane referentne cijene i provjera dostupnosti prije dolaska.',
     cta: 'Pogledajte aktualne akcije',
     href: '/namjestaj?akcija=da',
     image: 'https://vespera.hr/wp-content/uploads/2026/06/Monaco_sastav02_dd822400.jpg',

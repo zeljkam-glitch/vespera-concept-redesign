@@ -9,8 +9,6 @@ import { roomLinks } from '@/lib/products';
 export default function Home() {
   return (
     <PageShell><main>
-      <PromoShowcase />
-
       <section className="hero">
         <div className="hero-grid">
           <div className="hero-copy"><p className="eyebrow">Salon namještaja u Karlovcu od 2008.</p><h1>Dobar namještaj počinje dobrim savjetom.</h1><p>Posjetite salon, isprobajte proizvode i razgovarajte s ljudima koji znaju pomoći.</p>
@@ -28,6 +26,8 @@ export default function Home() {
         <a className="trust-call" href="tel:+38547645535"><Clock3 aria-hidden="true" /><span><strong>Provjera dostupnosti</strong> 047 645 535</span></a>
       </section>
 
+      <PromoShowcase />
+
       <section className="section container" id="kategorije">
         <div className="section-head"><div><p className="eyebrow">Namještaj po prostorijama</p><h2>Što danas uređujete?</h2></div><p>Krenite od prostorije, a zatim suzite izbor prema dimenzijama, cijeni i dostupnosti.</p></div>
         <div className="room-home-grid">{roomLinks.map((room, index) => <Link href={room.href} key={room.name}><span>0{index + 1}</span><div><strong>{room.name}</strong><small>{room.description}</small></div><ArrowRight aria-hidden="true" /></Link>)}</div>
@@ -35,7 +35,7 @@ export default function Home() {
       </section>
 
       <section className="section current-section" id="aktualno"><div className="container">
-        <div className="sale-heading"><div><p className="eyebrow">Aktualne akcije</p><h2>Jasna cijena. Ponuda koja se mijenja.</h2></div><p>Prikazujemo redovnu i akcijsku cijenu te status proizvoda. Model, boju i količinu potvrdite prije dolaska.</p></div>
+        <div className="sale-heading"><div><p className="eyebrow">Aktualne akcije</p><h2>Jasna cijena. Ponuda koja se mijenja.</h2></div><p>Prikazujemo akcijsku i referentnu cijenu te status proizvoda. Svi iznosi u ovom konceptu su demo podaci koje Vespera treba potvrditi prije objave.</p></div>
         <ActionCarousel />
         <div className="action-catalog"><div><p className="eyebrow">Mjesečni katalog akcija</p><h3>Sve aktualne ponude na jednom mjestu.</h3><p>Katalog se redovito osvježava. U konačnoj verziji Natalija ga može zamijeniti bez pomoći programera.</p></div><Link className="button button-accent" href="/namjestaj?akcija=da">Otvorite akcijski katalog <ArrowRight aria-hidden="true" /></Link></div>
       </div></section>

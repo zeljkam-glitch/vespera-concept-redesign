@@ -16,7 +16,7 @@ export function Header() {
       <Image src="/brand/vespera-logo.png" alt="Vespera namještaj" width={480} height={480} priority />
     </Link>
     <nav className="desktop-nav" aria-label="Glavna navigacija">
-      <Link href="/namjestaj?akcija=da">Akcije</Link><Link className="available-now-link" href="/namjestaj?odmah=da">Dostupno odmah</Link><Link href="/namjestaj">Namještaj</Link><Link href="/kuhinje">Kuhinje po mjeri</Link><Link href="/novosti">Novosti</Link><Link href="/blog">Savjeti</Link>
+      <Link href="/namjestaj?akcija=da">Akcije</Link><Link className="available-now-link" href="/namjestaj?odmah=da">Dostupno odmah</Link><Link href="/namjestaj">Namještaj</Link><Link href="/kuhinje">Kuhinje po mjeri</Link><Link href="/blog">Savjeti</Link><Link href="/#salon-info">Salon</Link>
     </nav>
     <a className="header-phone" href="tel:+38547645535"><Phone size={20} aria-hidden="true" /> 047 645 535</a>
     <details className="mobile-menu">
@@ -53,4 +53,4 @@ export function StickyNav() {
   </nav>;
 }
 
-export function PageShell({ children }: { children: React.ReactNode }) { return <><Header />{children}<Footer /><StickyNav /></>; }
+export function PageShell({ children }: { children: React.ReactNode }) { return <><a className="skip-link" href="#main-content">Preskočite na glavni sadržaj</a><Header /><div id="main-content" tabIndex={-1}>{children}</div><Footer /><StickyNav /></>; }
