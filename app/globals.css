@@ -558,7 +558,8 @@ h3 { line-height: 1.18; }
   .mobile-menu { display: block; }
   .hero-grid, .kitchen-feature, .salon-grid, .product-layout, .fit-card, .kitchen-hero-grid, .project-grid, .kitchen-clarity, .sale-heading, .social-grid, .service-card, .faq-grid, .payment-panel, .catalog-hero-grid, .visualizer-grid { grid-template-columns: 1fr; }
   .promo-showcase, .promo-content { min-height: 560px; }
-  .promo-content { width: min(100% - 112px, 760px); padding: 58px 0 78px; }
+  .promo-content { width: min(100%, 980px); padding: 58px 110px 78px; }
+  .promo-arrow { top: 40%; }
   .promo-shade { background: linear-gradient(90deg, rgba(9,9,9,.86) 0%, rgba(9,9,9,.65) 60%, rgba(9,9,9,.25) 100%); }
   .room-home-grid, .room-link-grid, .category-directory { grid-template-columns: repeat(2, 1fr); }
   .action-catalog { grid-template-columns: 1fr; }
