@@ -13,7 +13,7 @@ export function UtilityBar() {
 export function Header() {
   return <><ConceptBar /><UtilityBar /><header className="site-header">
     <Link href="/" className="brand" aria-label="Vespera namještaj, početna">
-      <Image src="/brand/vespera-logo.png" alt="Vespera namještaj" width={480} height={480} priority />
+      <Image src="/brand/vespera-logo-horizontal.svg" alt="Vespera namještaj" width={560} height={168} priority />
     </Link>
     <nav className="desktop-nav" aria-label="Glavna navigacija">
       <Link href="/namjestaj?akcija=da">Akcije</Link><Link className="available-now-link" href="/namjestaj?odmah=da">Dostupno odmah</Link><Link href="/namjestaj">Namještaj</Link><Link href="/kuhinje">Kuhinje po mjeri</Link><Link href="/blog">Savjeti</Link><Link href="/#salon-info">Salon</Link>
@@ -36,7 +36,7 @@ export function SearchBox() {
 
 export function Footer() {
   return <footer className="footer" id="salon">
-    <div><Link href="/" className="brand brand-light"><Image src="/brand/vespera-logo.png" alt="Vespera namještaj" width={480} height={480} /></Link><p>Dobar namještaj počinje dobrim savjetom.</p></div>
+    <div><Link href="/" className="brand brand-light"><Image src="/brand/vespera-logo-yellow.svg" alt="Vespera namještaj" width={560} height={168} /></Link><p>Dobar namještaj počinje dobrim savjetom.</p></div>
     <div><h3>Salon u Karlovcu</h3><p>Matka Laginje 1, 47000 Karlovac</p><a href="tel:+38547645535">047 645 535</a><a href="mailto:namjestaj@vespera.hr">namjestaj@vespera.hr</a></div>
     <div><h3>Tu smo za pomoć</h3><Link href="/namjestaj">Namještaj po prostorijama</Link><Link href="/namjestaj?odmah=da">Dostupno odmah</Link><Link href="/novosti">Novosti</Link><Link href="/blog">Savjeti prije kupnje</Link><Link href="/kuhinje">3D planiranje kuhinje</Link><Link href="/informacije">Korisnički kutak</Link><div className="footer-social"><a href="https://www.facebook.com/vesperanamjestaj/photos/" target="_blank" rel="noreferrer" aria-label="Vespera namještaj na Facebooku"><MessageCircle aria-hidden="true" /> Facebook</a><a href="https://www.instagram.com/vespera_namjestaj/" target="_blank" rel="noreferrer" aria-label="Vespera namještaj na Instagramu"><Camera aria-hidden="true" /> Instagram</a></div></div>
     <div className="footer-payments">
