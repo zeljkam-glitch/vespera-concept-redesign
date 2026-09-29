@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { CirclePercent, Phone, Search, SlidersHorizontal } from 'lucide-react';
 import { PageShell } from '@/components/site-chrome';
-import { catalogProducts, roomLinks } from '@/lib/products';
+import { catalogProducts, categoryGroups } from '@/lib/products';
 
 const statuses = ['Na zalihi', 'Po narudžbi', 'Izložbeni primjerak'];
 
@@ -36,7 +36,7 @@ function CatalogContent() {
         </div>
       </section>
 
-      <section className="room-nav container" aria-labelledby="room-heading"><div className="room-nav-head"><p className="eyebrow">Pronađite prema prostoriji</p><h2 id="room-heading">Gdje uređujete?</h2></div><div className="room-link-grid">{roomLinks.map((item) => <Link href={item.href} key={item.name}><strong>{item.name}</strong><span>{item.description}</span></Link>)}</div></section>
+      <section className="room-nav container" aria-labelledby="room-heading"><div className="room-nav-head"><p className="eyebrow">Kategorije kao u velikom katalogu</p><h2 id="room-heading">Pronađite proizvod po prostoriji.</h2><p>Prvo odaberite prostoriju, zatim vrstu namještaja. Podjela ostaje pregledna i kada se katalog proširi na stotine proizvoda.</p></div><div className="category-directory">{categoryGroups.map((group) => <article key={group.name}><Link className="category-title" href={group.href}>{group.name}</Link><ul>{group.categories.map((category) => <li key={category}><Link href={`/namjestaj?q=${encodeURIComponent(category)}`}>{category}</Link></li>)}</ul></article>)}</div></section>
 
       <section className="section container catalog-layout" aria-label="Katalog proizvoda">
         <aside className="catalog-filters"><div className="filter-heading"><SlidersHorizontal aria-hidden="true" /><h2>Filtrirajte</h2></div>
@@ -48,7 +48,7 @@ function CatalogContent() {
         </aside>
 
         <div className="catalog-results"><div className="catalog-results-head"><p><strong>{products.length}</strong> {products.length === 1 ? 'proizvod' : 'proizvoda'}</p><span>Demo podaci za prikaz budućeg sustava</span></div>
-          {products.length ? <div className="product-grid catalog-products">{products.map((product) => <article className="product-card" key={product.slug}><div className="product-image"><Image src={product.image} alt={`${product.type} ${product.name}`} width={960} height={720} sizes="(max-width: 620px) 100vw, (max-width: 1100px) 50vw, 33vw" />{product.discount && <span className="promo-badge">{product.discount}</span>}</div><div className="product-body"><span className={`catalog-status catalog-status-${product.status === 'Po narudžbi' ? 'order' : product.status === 'Izložbeni primjerak' ? 'display' : 'check'}`}>{product.status}</span><p className="product-kicker">{product.room} · {product.dimensions}</p><h3>{product.name}</h3><p className="product-features">{product.type} · {product.features.join(' · ')}</p><div className="anchor-price">{product.regularPrice && <span>Prije {product.regularPrice}</span>}<strong>{product.price}</strong><small>Cijena evidentirana 10. 09. 2026.</small></div>{product.href ? <Link className="text-link" href={product.href}>Pogledajte model</Link> : <a className="text-link" href={`tel:+38547645535`}><Phone size={19} aria-hidden="true" /> Provjerite u salonu</a>}</div></article>)}</div> : <div className="empty-result"><CirclePercent aria-hidden="true" /><h2>Nema točnog podudaranja</h2><p>Pokušajte s manje uvjeta ili nazovite salon. Aktualna ponuda mijenja se tjedno.</p><a className="button button-accent" href="tel:+38547645535">Nazovite salon</a></div>}
+          {products.length ? <div className="product-grid catalog-products">{products.map((product) => <article className="product-card" key={product.slug}><Link className="product-card-link" href={product.href ?? `/proizvod/${product.slug}`} aria-label={`Pogledajte ${product.type} ${product.name}`}><div className="product-image"><Image src={product.image} alt={`${product.type} ${product.name}`} width={960} height={720} sizes="(max-width: 620px) 100vw, (max-width: 1100px) 50vw, 33vw" />{product.discount && <span className="promo-badge">{product.discount}</span>}</div><div className="product-body"><span className={`catalog-status catalog-status-${product.status === 'Po narudžbi' ? 'order' : product.status === 'Izložbeni primjerak' ? 'display' : 'check'}`}>{product.status}</span><p className="product-kicker">{product.room} · {product.dimensions}</p><h3>{product.name}</h3><p className="product-features">{product.type} · {product.features.join(' · ')}</p><div className="anchor-price">{product.regularPrice && <span>Prije {product.regularPrice}</span>}<strong>{product.price}</strong><small>Cijena evidentirana 10. 09. 2026.</small></div><span className="text-link">Pogledajte detalje</span></div></Link></article>)}</div> : <div className="empty-result"><CirclePercent aria-hidden="true" /><h2>Nema točnog podudaranja</h2><p>Pokušajte s manje uvjeta ili nazovite salon. Aktualna ponuda mijenja se tjedno.</p><a className="button button-accent" href="tel:+38547645535">Nazovite salon</a></div>}
         </div>
       </section>
     </main></PageShell>

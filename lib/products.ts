@@ -142,3 +142,36 @@ export const roomLinks = [
   { name: 'Predsoblje', description: 'Cipelari, ormari, vješalice i ogledala', href: '/namjestaj?q=predsoblje' },
   { name: 'Ured i radna soba', description: 'Radni stolovi, uredske stolice i odlaganje', href: '/namjestaj?q=ured' },
 ];
+
+export const categoryGroups = [
+  {
+    name: 'Dnevni boravak',
+    href: '/namjestaj?prostorija=Dnevni+boravak',
+    categories: ['Sjedeće garniture', 'Trosjedi i dvosjedi', 'Fotelje i taburei', 'Regali i TV komode', 'Klub stolići'],
+  },
+  {
+    name: 'Spavaća soba',
+    href: '/namjestaj?prostorija=Spavaća+soba',
+    categories: ['Kreveti', 'Madraci i nadmadraci', 'Ormari', 'Podnice', 'Komode i noćni ormarići'],
+  },
+  {
+    name: 'Kuhinja',
+    href: '/namjestaj?prostorija=Kuhinja',
+    categories: ['Kuhinje po mjeri', 'Blok kuhinje', 'Radne ploče', 'Sudoperi i slavine', 'Kuhinjski dodaci'],
+  },
+  {
+    name: 'Blagovaonica',
+    href: '/namjestaj?q=blagovaonica',
+    categories: ['Stolovi', 'Stolice', 'Barske stolice', 'Blagovaonski kompleti'],
+  },
+  {
+    name: 'Predsoblje i odlaganje',
+    href: '/namjestaj?q=predsoblje',
+    categories: ['Cipelari', 'Vješalice', 'Ormari', 'Komode', 'Ogledala'],
+  },
+  {
+    name: 'Ured i radna soba',
+    href: '/namjestaj?q=ured',
+    categories: ['Radni stolovi', 'Uredske stolice', 'Police i odlaganje'],
+  },
+];
