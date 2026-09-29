@@ -15,6 +15,7 @@ function CatalogContent() {
   const initialQuery = params.get('q') ?? '';
   const initialRoom = params.get('prostorija') ?? 'Sve prostorije';
   const salesOnly = params.get('akcija') === 'da';
+  const immediateOnly = params.get('odmah') === 'da';
   const [query, setQuery] = useState(initialQuery);
   const [room, setRoom] = useState(initialRoom);
   const [status, setStatus] = useState('Sve dostupnosti');
@@ -24,14 +25,15 @@ function CatalogContent() {
     const matchesQuery = !query.trim() || text.includes(query.trim().toLocaleLowerCase('hr'));
     const matchesRoom = room === 'Sve prostorije' || product.room === room;
     const matchesStatus = status === 'Sve dostupnosti' || product.status === status;
-    return matchesQuery && matchesRoom && matchesStatus && (!salesOnly || Boolean(product.discount));
-  }), [query, room, status, salesOnly]);
+    const isImmediate = product.status === 'Na zalihi' || product.status === 'Izložbeni primjerak';
+    return matchesQuery && matchesRoom && matchesStatus && (!salesOnly || Boolean(product.discount)) && (!immediateOnly || isImmediate);
+  }), [query, room, status, salesOnly, immediateOnly]);
 
   return (
     <PageShell><main>
       <section className="catalog-hero">
         <div className="container catalog-hero-grid">
-          <div><nav className="breadcrumbs" aria-label="Putanja"><Link href="/">Početna</Link><span aria-hidden="true">/</span><span>Namještaj</span></nav><p className="eyebrow">Pregled kao webshop, kupnja uz savjet</p><h1>{salesOnly ? 'Aktualne akcije' : 'Namještaj za cijeli dom'}</h1><p className="lead">Pregledajte modele, cijene i mogućnosti. Proizvod rezervirate ili naručujete razgovorom sa salonom, bez nesigurne online kupnje.</p></div>
+          <div><nav className="breadcrumbs" aria-label="Putanja"><Link href="/">Početna</Link><span aria-hidden="true">/</span><span>Namještaj</span></nav><p className="eyebrow">Pregled kao webshop, kupnja uz savjet</p><h1>{immediateOnly ? 'Dostupno odmah' : salesOnly ? 'Aktualne akcije' : 'Namještaj za cijeli dom'}</h1><p className="lead">{immediateOnly ? 'Proizvodi na zalihi i izložbeni primjerci koje ne trebate čekati kao redovnu narudžbu. Točnu dostupnost potvrdite prije dolaska.' : 'Pregledajte modele, cijene i mogućnosti. Proizvod rezervirate ili naručujete razgovorom sa salonom, bez nesigurne online kupnje.'}</p></div>
           <aside><strong>Važno</strong><p>Ponuda se mijenja svaki tjedan. Prije dolaska potvrdite model, boju i dostupnost telefonom.</p><a href="tel:+38547645535"><Phone aria-hidden="true" /> 047 645 535</a></aside>
         </div>
       </section>
