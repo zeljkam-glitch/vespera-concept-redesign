@@ -208,6 +208,7 @@ h3 { line-height: 1.18; }
 .payment-logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 10px; }
 .payment-logos > span { width: 112px; height: 58px; padding: 10px; display: grid; place-items: center; background: #fff; border: 1px solid #73736d; }
 .payment-logos img { max-width: 88px; max-height: 34px; object-fit: contain; }
+.payment-logos .google-pay-logo { transform: scale(1.45); }
 .footer-note { grid-column: 1 / -1; padding-top: 24px; border-top: 1px solid #4d4d49; font-size: .8rem; }
 .sticky-nav { display: none; }
 
