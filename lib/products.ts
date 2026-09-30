@@ -24,7 +24,7 @@ export const catalogProducts: CatalogProduct[] = [
     price: '1.152,00 €',
     discount: '−20%',
     image: 'https://vespera.hr/wp-content/uploads/2026/07/1781691780_1781690676836_edit_338493474214675.png',
-    status: 'Provjerite dostupnost',
+    status: 'Na zalihi',
     features: ['pomoćni ležaj', 'spremnik', 'za manji prostor'],
     href: '/proizvod/manila',
   },
@@ -77,7 +77,7 @@ export const catalogProducts: CatalogProduct[] = [
     price: '920,00 €',
     discount: '−20%',
     image: 'https://vespera.hr/wp-content/uploads/2023/02/lotos-krevet-1170x707.png',
-    status: 'Provjerite dostupnost',
+    status: 'Na zalihi',
     features: ['spremnik', 'tapecirano uzglavlje', 'bračni krevet'],
   },
   {
@@ -90,7 +90,7 @@ export const catalogProducts: CatalogProduct[] = [
     price: '825,00 €',
     discount: '−25%',
     image: 'https://vespera.hr/wp-content/uploads/2026/04/remi-1140x1140.jpg',
-    status: 'Provjerite dostupnost',
+    status: 'Izložbeni primjerak',
     features: ['više dimenzija', 'tapecirano uzglavlje', 'više boja'],
   },
   {
