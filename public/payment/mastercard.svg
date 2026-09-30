@@ -1,7 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152 96" role="img" aria-labelledby="mastercard-title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 60" role="img" aria-labelledby="mastercard-title">
   <title id="mastercard-title">Mastercard</title>
-  <circle cx="59" cy="42" r="30" fill="#eb001b"/>
-  <circle cx="93" cy="42" r="30" fill="#f79e1b"/>
-  <path d="M76 18.6a30 30 0 0 1 0 46.8 30 30 0 0 1 0-46.8Z" fill="#ff5f00"/>
-  <text x="76" y="88" fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="middle">mastercard</text>
+  <circle cx="36" cy="30" r="24" fill="#eb001b"/>
+  <circle cx="60" cy="30" r="24" fill="#f79e1b"/>
+  <path d="M48 10.9a24 24 0 0 1 0 38.2 24 24 0 0 1 0-38.2Z" fill="#ff5f00"/>
 </svg>
