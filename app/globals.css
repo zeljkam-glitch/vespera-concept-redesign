@@ -499,6 +499,11 @@ h3 { line-height: 1.18; }
 .visualizer-tool { padding: clamp(24px, 4vw, 42px); display: grid; gap: 18px; background: #fff; border: 1px solid var(--ink); box-shadow: 8px 8px 0 var(--accent); }
 .visualizer-tool > label > span { margin-bottom: 8px; display: block; font-size: .82rem; font-weight: 800; }
 .visualizer-tool select { width: 100%; min-height: 54px; padding: 10px 12px; border: 1px solid var(--ink); background: #fff; color: var(--ink); }
+.visualizer-tool > svg { color: var(--ink); }
+.visualizer-tool > div > strong { font-size: 1.3rem; }
+.visualizer-tool > div > p { margin: 6px 0 0; color: var(--muted); }
+.planner-feature-list { margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; list-style: none; border-top: 1px solid var(--line); }
+.planner-feature-list li { min-height: 54px; padding: 12px 8px 12px 0; display: flex; align-items: center; border-bottom: 1px solid var(--line); font-weight: 760; }
 .visual-upload { min-height: 100px; padding: 18px; display: grid; grid-template-columns: 36px 1fr; align-items: center; gap: 14px; border: 1px dashed #666; cursor: pointer; }
 .visual-upload > span { margin: 0 !important; }
 .visual-upload strong, .visual-upload small { display: block; overflow-wrap: anywhere; }
@@ -510,6 +515,11 @@ h3 { line-height: 1.18; }
 .visualizer-hero { padding: clamp(66px, 8vw, 112px) 0; background: var(--accent); border-bottom: 1px solid var(--ink); }
 .visualizer-hero h1 { max-width: 1020px; }
 .visualizer-hero .lead { max-width: 64ch; color: #353530; }
+.planner-hero { padding: clamp(34px, 5vw, 62px) 0; }
+.planner-hero .breadcrumbs { margin-bottom: 20px; }
+.planner-hero h1 { max-width: 920px; margin-bottom: 14px; font-size: clamp(2.7rem, 5.4vw, 4.9rem); }
+.planner-hero .lead { max-width: 72ch; margin-bottom: 14px; font-size: 1rem; }
+.planner-hero .prototype-note { max-width: 760px; margin: 0; padding: 11px 14px; background: #fff; border-left: 1px solid var(--ink); }
 .room-visualizer { display: grid; grid-template-columns: minmax(320px, .78fr) minmax(0, 1.22fr); gap: clamp(28px, 5vw, 70px); align-items: start; }
 .visualizer-controls { padding: clamp(22px, 4vw, 38px); display: grid; gap: 26px; position: sticky; top: 108px; background: #fff; border: 1px solid var(--ink); }
 .visualizer-controls fieldset { margin: 0; padding: 0 0 24px; display: grid; gap: 14px; border: 0; border-bottom: 1px solid var(--line); }
