@@ -710,13 +710,14 @@ h3 { line-height: 1.18; }
 .media-copy-button svg { width: 20px; height: 20px; }
 .media-download-text { width: fit-content; margin-top: 28px; }
 .media-materials { padding: clamp(72px, 9vw, 118px) 0; background: #d9d9d4; border-top: 1px solid #888; border-bottom: 1px solid #888; }
-.media-assets-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.media-assets-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 .media-assets-grid article { min-width: 0; padding-bottom: 24px; background: #fff; border: 1px solid #888882; }
 .media-assets-grid article > :not(.media-asset-preview) { margin-right: 24px; margin-left: 24px; }
 .media-assets-grid h3 { margin-top: 24px; margin-bottom: 9px; }
 .media-assets-grid p { min-height: 54px; color: var(--muted); font-size: .9rem; }
 .media-asset-preview { min-height: 250px; padding: 30px; display: grid; place-items: center; border-bottom: 1px solid #888882; }
 .media-asset-preview img { width: 100%; height: auto; }
+.media-asset-square img { width: min(240px, 72%); }
 .media-asset-light { background: #fff; }
 .media-asset-dark { background: var(--ink); }
 .media-asset-yellow { background: var(--accent); }
@@ -822,7 +823,6 @@ h3 { line-height: 1.18; }
   .media-hero-grid, .media-contact-grid { grid-template-columns: 1fr; }
   .media-hero-mark { min-height: 300px; }
   .media-assets-grid { grid-template-columns: 1fr 1fr; }
-  .media-assets-grid article:last-child { grid-column: 1 / -1; }
 }
 
 @media (max-width: 620px) {
@@ -903,7 +903,7 @@ h3 { line-height: 1.18; }
   .media-index { grid-template-columns: 1fr 1fr; }
   .media-index a { min-height: 62px; padding: 12px; border-top: 1px solid var(--ink); }
   .media-copy-grid, .media-assets-grid, .media-topics { grid-template-columns: 1fr; }
-  .media-copy-grid .media-copy-long, .media-assets-grid article:last-child { grid-column: 1; }
+  .media-copy-grid .media-copy-long { grid-column: 1; }
   .media-copy-grid article { min-height: 0; }
   .media-copy-button { width: 100%; margin-top: 24px; justify-content: center; }
   .media-asset-preview { min-height: 210px; }

@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
   <title id="title">Vespera namještaj</title>
-  <desc id="desc">Primarni kvadratni Vespera logotip u žutoj i tamnoj boji</desc>
-  <rect width="512" height="228" fill="#ffea00"/>
-  <rect y="228" width="512" height="284" fill="#211a16"/>
-  <text x="256" y="211" fill="#111111" font-family="Times New Roman, Times, serif" font-size="104" text-anchor="middle" letter-spacing="-4">VESPERA</text>
-  <text x="480" y="292" fill="#ffea00" font-family="Times New Roman, Times, serif" font-size="55" text-anchor="end">namještaj</text>
+  <desc id="desc">Kvadratni Vespera logotip sa žutim gornjim i tamnim donjim poljem</desc>
+  <rect width="512" height="264" fill="#ffea00"/>
+  <rect y="264" width="512" height="248" fill="#211a16"/>
+  <text x="256" y="244" fill="#111111" font-family="Times New Roman, Times, serif" font-size="104" text-anchor="middle" letter-spacing="-4">VESPERA</text>
+  <text x="480" y="331" fill="#ffea00" font-family="Times New Roman, Times, serif" font-size="55" text-anchor="end">namještaj</text>
 </svg>
