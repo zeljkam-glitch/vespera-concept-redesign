@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft, Check, Heart, Mail, MapPin, Phone, Share2, Truck } from 'lucide-react';
 import { PageShell } from '@/components/site-chrome';
+import { ProductPurchaseClarity } from '@/components/product-purchase-clarity';
 
 export default function ManilaPage() {
   const [wall,setWall]=useState('');
@@ -32,6 +33,8 @@ export default function ManilaPage() {
         <div className="share-row"><a className="button button-ghost" href="mailto:namjestaj@vespera.hr?subject=Upit%20za%20garnituru%20Manila&body=Zanima%20me%20kutna%20garnitura%20Manila.%20Molim%20informacije%20o%20dostupnosti%2C%20izvedbama%20i%20roku%20isporuke."><Mail aria-hidden="true"/> Pošaljite upit e-mailom</a><button className="button button-ghost" type="button" onClick={copyLink}><Share2 aria-hidden="true"/> Kopirajte poveznicu</button></div>{copyStatus && <output className="copy-status" aria-live="polite">{copyStatus}</output>}
       </div>
     </section>
+
+    <ProductPurchaseClarity status="Provjerite dostupnost" hasDiscount />
 
     <section className="container section"><p className="eyebrow">Brza procjena</p><h2>Je li Manila za vas?</h2><div className="for-you"><div><Check/><strong>Imate manji ili srednji dnevni boravak</strong><span>Kompaktna je u odnosu na mnoge velike kutne garniture.</span></div><div><Check/><strong>Povremeno trebate dodatni ležaj</strong><span>Razvlači se u površinu za spavanje 200 × 160 cm.</span></div><div><Check/><strong>Nedostaje vam prostora za odlaganje</strong><span>Ugrađeni spremnik skriva posteljinu i deke.</span></div></div></section>
 

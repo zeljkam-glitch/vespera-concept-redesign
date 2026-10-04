@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Check, Mail, MapPin, Phone, Ruler, Truck } from 'lucide-react';
 import { PageShell } from '@/components/site-chrome';
+import { ProductPurchaseClarity } from '@/components/product-purchase-clarity';
 import { catalogProducts } from '@/lib/products';
 
 type ProductPageProps = { params: Promise<{ slug: string }> };
@@ -34,6 +35,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="cta-stack"><a className="button button-accent" href="tel:+38547645535"><Phone aria-hidden="true" /> Provjerite dostupnost</a><a className="button button-light" href={`mailto:namjestaj@vespera.hr?subject=${encodeURIComponent(`Upit za proizvod ${product.name}`)}&body=${encodeURIComponent(`Zanima me ${product.type} ${product.name}. Molim informacije o dostupnosti, izvedbama i roku isporuke.`)}`}><Mail aria-hidden="true" /> Pošaljite upit e-mailom</a><a className="button button-light" href="https://maps.google.com/?q=Matka+Laginje+1+Karlovac"><MapPin aria-hidden="true" /> Kako do salona</a></div>
       </div>
     </section>
+
+    <ProductPurchaseClarity status={product.status} hasDiscount={Boolean(product.discount)} />
 
     <section className="container section"><p className="eyebrow">Prije dolaska u salon</p><h2>Što možete provjeriti?</h2><div className="for-you"><div><Ruler aria-hidden="true" /><strong>Odgovaraju li dimenzije?</strong><span>Izmjerite zid, prolaze, vrata i mjesto potrebno za korištenje proizvoda.</span></div><div><Check aria-hidden="true" /><strong>Koje su izvedbe dostupne?</strong><span>Pitajte za boje, tkanine, smjer, dodatne elemente i moguće prilagodbe.</span></div><div><Truck aria-hidden="true" /><strong>Kada proizvod stiže?</strong><span>Rok, dostavu, unos i montažu tražite navedene na pisanoj ponudi.</span></div></div></section>
 

@@ -29,7 +29,7 @@ export function PromoShowcase() {
           <strong>{product.price}</strong>
         </div>
         <Link className="button button-accent" href={product.href ?? `/proizvod/${product.slug}`}>Pogledajte proizvod</Link>
-        <small>*Demo cijene i dostupnost Vespera potvrđuje prije objave.</small>
+        <small>*Demo cijene, raspoloživu količinu i razdoblje akcije Vespera potvrđuje prije objave.</small>
       </div>
       <button className="promo-arrow promo-arrow-left" type="button" onClick={() => go(-1)} aria-label="Prethodni akcijski proizvod"><ChevronLeft aria-hidden="true" /></button>
       <button className="promo-arrow promo-arrow-right" type="button" onClick={() => go(1)} aria-label="Sljedeći akcijski proizvod"><ChevronRight aria-hidden="true" /></button>
