@@ -15,7 +15,7 @@ const topics = [
     title: 'Načini plaćanja',
     icon: CreditCard,
     text: 'Dostupan je gotovinski popust i obročno plaćanje do 24 rate. Broj rata ovisi o kartici, banci, iznosu i uvjetima koji vrijede na dan kupnje.',
-    bullets: ['Prije kupnje potvrdite broj rata za svoju karticu.', 'Popust i obročna cijena ne moraju biti jednaki.', 'Mogućnosti plaćanja potvrđuje salon.'],
+    bullets: ['Prihvaćeni su Google Pay i Apple Pay.', 'Prije kupnje potvrdite broj rata za svoju karticu.', 'Popust i obročna cijena ne moraju biti jednaki.'],
   },
   {
     id: 'dostava',
