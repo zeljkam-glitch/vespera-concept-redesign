@@ -6,8 +6,11 @@ import { ArrowLeft, Check, Mail, MapPin, Phone, Ruler, Truck } from 'lucide-reac
 import { PageShell } from '@/components/site-chrome';
 import { ProductPurchaseClarity } from '@/components/product-purchase-clarity';
 import { catalogProducts } from '@/lib/products';
+import { getPublishedContent } from '@/lib/admin/content';
 
 type ProductPageProps = { params: Promise<{ slug: string }> };
+
+export const dynamic = 'force-dynamic';
 
 export function generateStaticParams() {
   return catalogProducts.filter((product) => product.slug !== 'manila').map((product) => ({ slug: product.slug }));
@@ -15,14 +18,14 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = catalogProducts.find((item) => item.slug === slug);
+  const product = (await getPublishedContent()).products.find((item) => item.slug === slug);
   if (!product) return {};
   return { title: `${product.name} | Vespera namještaj`, description: `${product.type} ${product.name}. Pogledajte cijenu, dimenzije i mogućnosti te provjerite dostupnost u salonu.` };
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = catalogProducts.find((item) => item.slug === slug);
+  const product = (await getPublishedContent()).products.find((item) => item.slug === slug);
   if (!product) notFound();
 
   return <PageShell><main>

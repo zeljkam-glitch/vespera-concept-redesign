@@ -31,7 +31,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="hr">
+    <html lang="hr" data-scroll-behavior="smooth">
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
         {children}

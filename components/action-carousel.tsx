@@ -4,11 +4,10 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { catalogProducts } from '@/lib/products';
+import type { CatalogProduct } from '@/lib/products';
 
-const actionProducts = catalogProducts.filter((product) => product.discount).slice(0, 8);
-
-export function ActionCarousel() {
+export function ActionCarousel({ products }: { products: CatalogProduct[] }) {
+  const actionProducts = products.filter((product) => product.discount).slice(0, 8);
   const trackRef = useRef<HTMLDivElement>(null);
   const move = (direction: number) => {
     const track = trackRef.current;
@@ -16,6 +15,8 @@ export function ActionCarousel() {
     const card = track.querySelector<HTMLElement>('.action-slide');
     track.scrollBy({ left: direction * ((card?.offsetWidth ?? 300) + 18), behavior: 'smooth' });
   };
+
+  if (!actionProducts.length) return <div className="empty-result"><h3>Trenutačno nema aktivnih akcija.</h3><p>Zakazane akcije pojavit će se automatski na datum početka.</p></div>;
 
   return <div className="action-carousel" aria-label="Akcijski proizvodi">
     <div className="action-carousel-controls"><p><strong>{actionProducts.length} izdvojenih proizvoda</strong><span>Pomaknite prstom ili koristite tipke.</span></p><div><button type="button" onClick={() => move(-1)} aria-label="Prethodni akcijski proizvodi"><ChevronLeft aria-hidden="true" /></button><button type="button" onClick={() => move(1)} aria-label="Sljedeći akcijski proizvodi"><ChevronRight aria-hidden="true" /></button></div></div>

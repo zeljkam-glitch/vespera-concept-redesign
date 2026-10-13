@@ -36,3 +36,6 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# Local admin content store. Production will use a durable database/object store.
+/.data/

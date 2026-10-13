@@ -4,14 +4,15 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { catalogProducts } from '@/lib/products';
+import type { CatalogProduct } from '@/lib/products';
 
-const actionProducts = catalogProducts.filter((product) => product.discount).slice(0, 8);
-
-export function PromoShowcase() {
+export function PromoShowcase({ products }: { products: CatalogProduct[] }) {
+  const actionProducts = products.filter((product) => product.discount).slice(0, 8);
   const [active, setActive] = useState(0);
   const product = actionProducts[active];
   const go = (direction: number) => setActive((current) => (current + direction + actionProducts.length) % actionProducts.length);
+
+  if (!product) return null;
 
   return (
     <section className="promo-showcase" aria-label="Aktualni proizvodi na akciji">

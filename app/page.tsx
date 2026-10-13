@@ -5,15 +5,19 @@ import { PromoShowcase } from '@/components/promo-showcase';
 import { ActionCarousel } from '@/components/action-carousel';
 import { PageShell, SearchBox } from '@/components/site-chrome';
 import { roomLinks } from '@/lib/products';
+import { getPublishedContent } from '@/lib/admin/content';
 
-export default function Home() {
+export const dynamic = 'force-dynamic';
+
+export default async function Home() {
+  const content = await getPublishedContent();
   return (
     <PageShell><main>
-      <PromoShowcase />
+      <PromoShowcase products={content.products} />
 
       <section className="hero">
         <div className="hero-grid">
-          <div className="hero-copy"><p className="eyebrow">Salon namještaja u Karlovcu od 2008.</p><h1>Dobar namještaj počinje dobrim savjetom.</h1><p>Posjetite salon, isprobajte proizvode i razgovarajte s ljudima koji znaju pomoći.</p>
+          <div className="hero-copy"><p className="eyebrow">{content.texts.heroEyebrow}</p><h1>{content.texts.heroTitle}</h1><p>{content.texts.heroBody}</p>
             <div className="hero-actions"><Link className="button button-accent" href="/namjestaj?akcija=da">Pogledajte akcije <ArrowRight aria-hidden="true" /></Link><Link className="button button-light" href="/kuhinje">Planirajte kuhinju</Link></div>
             <a className="text-link" href="tel:+38547645535"><Phone size={20} aria-hidden="true" /> Radije biste razgovarali? 047 645 535</a>
           </div>
@@ -35,8 +39,8 @@ export default function Home() {
       </section>
 
       <section className="section current-section" id="aktualno"><div className="container">
-        <div className="sale-heading"><div><p className="eyebrow">Aktualne akcije</p><h2>Jasna cijena. Ponuda koja se mijenja.</h2></div><p>Prikazujemo akcijsku i referentnu cijenu te status proizvoda. Svi iznosi u ovom konceptu su demo podaci koje Vespera treba potvrditi prije objave.</p></div>
-        <ActionCarousel />
+        <div className="sale-heading"><div><p className="eyebrow">{content.texts.actionsEyebrow}</p><h2>{content.texts.actionsTitle}</h2></div><p>{content.texts.actionsBody}</p></div>
+        <ActionCarousel products={content.products} />
         <div className="action-catalog"><div><p className="eyebrow">Mjesečni katalog akcija</p><h3>Sve aktualne ponude na jednom mjestu.</h3><p>Katalog se redovito osvježava. Valentina ga u konačnoj verziji može zamijeniti bez pomoći programera.</p></div><Link className="button button-accent" href="/namjestaj?akcija=da">Otvorite akcijski katalog <ArrowRight aria-hidden="true" /></Link></div>
       </div></section>
 
