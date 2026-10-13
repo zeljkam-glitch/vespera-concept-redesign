@@ -2,7 +2,7 @@ import 'server-only';
 
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { env } from 'cloudflare:workers';
+import { get, put } from '@vercel/blob';
 import { catalogProducts, type CatalogProduct } from '@/lib/products';
 
 export type Promotion = {
@@ -52,10 +52,33 @@ export type ContentWorkspace = {
 };
 
 const contentPath = path.join(process.cwd(), '.data', 'vespera-content.json');
+const contentBlobPath = 'admin/vespera-content.json';
 
-function database() {
+function hasBlobStorage() {
+  return Boolean(process.env.BLOB_STORE_ID || process.env.BLOB_READ_WRITE_TOKEN);
+}
+
+async function readBlobWorkspace() {
+  const result = await get(contentBlobPath, { access: 'private', useCache: false });
+  if (!result || result.statusCode !== 200) return null;
+  const parsed: unknown = JSON.parse(await new Response(result.stream).text());
+  return isWorkspace(parsed) ? parsed : null;
+}
+
+async function saveBlobWorkspace(workspace: ContentWorkspace) {
+  await put(contentBlobPath, `${JSON.stringify(workspace, null, 2)}\n`, {
+    access: 'private',
+    addRandomSuffix: false,
+    allowOverwrite: true,
+    contentType: 'application/json; charset=utf-8',
+    cacheControlMaxAge: 60,
+  });
+}
+
+async function readFileWorkspace() {
   try {
-    return env.DB ?? null;
+    const parsed: unknown = JSON.parse(await readFile(contentPath, 'utf8'));
+    return isWorkspace(parsed) ? parsed : null;
   } catch {
     return null;
   }
@@ -107,38 +130,13 @@ function isWorkspace(value: unknown): value is ContentWorkspace {
 }
 
 export async function getWorkspace(): Promise<ContentWorkspace> {
-  const db = database();
-  if (db) {
-    try {
-      const row = await db.prepare('SELECT payload FROM vespera_content WHERE id = 1').first<{ payload: string }>();
-      if (row) {
-        const parsed: unknown = JSON.parse(row.payload);
-        if (isWorkspace(parsed)) return parsed;
-      }
-      return createInitialWorkspace();
-    } catch (error) {
-      const message = error instanceof Error ? error.message : '';
-      if (!message.includes('no such table')) throw error;
-      return createInitialWorkspace();
-    }
-  }
-  try {
-    const parsed: unknown = JSON.parse(await readFile(contentPath, 'utf8'));
-    return isWorkspace(parsed) ? parsed : createInitialWorkspace();
-  } catch {
-    return createInitialWorkspace();
-  }
+  if (hasBlobStorage()) return (await readBlobWorkspace()) ?? createInitialWorkspace();
+  return (await readFileWorkspace()) ?? createInitialWorkspace();
 }
 
 export async function saveWorkspace(workspace: ContentWorkspace) {
-  const db = database();
-  if (db) {
-    const payload = JSON.stringify(workspace);
-    await db.prepare(`
-      INSERT INTO vespera_content (id, payload, updated_at)
-      VALUES (1, ?1, ?2)
-      ON CONFLICT(id) DO UPDATE SET payload = excluded.payload, updated_at = excluded.updated_at
-    `).bind(payload, new Date().toISOString()).run();
+  if (hasBlobStorage()) {
+    await saveBlobWorkspace(workspace);
     return;
   }
   const directory = path.dirname(contentPath);

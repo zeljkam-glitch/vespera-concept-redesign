@@ -1,4 +1,6 @@
-import { env } from 'cloudflare:workers';
+import { mkdir, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { put } from '@vercel/blob';
 import { getWorkspace, saveWorkspace } from '@/lib/admin/content';
 import { isAdmin } from '@/lib/admin/session';
 
@@ -25,7 +27,18 @@ export async function POST(request: Request) {
 
   const id = crypto.randomUUID();
   const key = `products/${id}.${extension}`;
-  await env.BUCKET.put(key, await file.arrayBuffer(), { httpMetadata: { contentType: file.type } });
+  if (process.env.BLOB_STORE_ID || process.env.BLOB_READ_WRITE_TOKEN) {
+    await put(key, file, {
+      access: 'private',
+      addRandomSuffix: false,
+      contentType: file.type,
+      cacheControlMaxAge: 86400,
+    });
+  } else {
+    const mediaPath = path.join(process.cwd(), '.data', 'media', key);
+    await mkdir(path.dirname(mediaPath), { recursive: true });
+    await writeFile(mediaPath, Buffer.from(await file.arrayBuffer()));
+  }
   const workspace = await getWorkspace();
   workspace.draft.media.push({ id, name, alt, url: `/admin-media/${key}` });
   workspace.draft.updatedAt = new Date().toISOString();
