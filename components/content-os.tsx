@@ -36,6 +36,7 @@ import { activeGuideItem, contentPillars, contentPlan, furnitureExamples, publis
 import styles from './content-os.module.css';
 
 type View = 'dashboard' | 'create' | 'ideas' | 'plan' | 'library' | 'education' | 'approvals' | 'guidelines' | 'results';
+type ActiveRole = 'Valentina' | 'Natalija';
 type AnalyticsRecord = { reach: number; saves: number; shares: number; comments: number; clicks: number; inquiries: number; lesson: string };
 type StoredState = { statuses: Record<string, ContentStatus>; checkedShots: Record<string, number[]>; analytics: Record<string, AnalyticsRecord> };
 
@@ -94,6 +95,8 @@ export function ContentOS() {
   const [selected, setSelected] = useState<ContentItem>(activeGuideItem);
   const [step, setStep] = useState(2);
   const [mobileNav, setMobileNav] = useState(false);
+  const [activeRole, setActiveRole] = useState<ActiveRole>('Valentina');
+  const [profileMenu, setProfileMenu] = useState(false);
   const [weekFilter, setWeekFilter] = useState<number | 'all'>('all');
   const [pillarFilter, setPillarFilter] = useState<string>('Sve teme');
   const [copied, setCopied] = useState(false);
@@ -120,6 +123,13 @@ export function ContentOS() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [view]);
+
+  useEffect(() => {
+    if (!mobileNav) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = previous; };
+  }, [mobileNav]);
 
   const selectedStatus = state.statuses[selected.id] ?? selected.status;
   const checkedShots = state.checkedShots[selected.id] ?? [];
@@ -166,15 +176,35 @@ export function ContentOS() {
     window.setTimeout(() => setCopied(false), 1600);
   }
 
+  function selectRole(role: ActiveRole) {
+    setActiveRole(role);
+    setProfileMenu(false);
+    setMobileNav(false);
+    setView('dashboard');
+  }
+
+  const roleMeta = activeRole === 'Valentina'
+    ? { initial: 'V', title: 'Koordinatorica sadržaja' }
+    : { initial: 'N', title: 'Vlasnica · odobrava' };
+
   return (
     <main className={styles.shell}>
       <header className={styles.topbar}>
         <button className={styles.mobileMenu} onClick={() => setMobileNav(true)} aria-label="Otvori izbornik"><Menu /></button>
         <div className={styles.wordmark}><Image src="/brand/vespera-logo-horizontal.svg" alt="Vespera namještaj" width={560} height={168} priority /><span>CONTENT OS</span></div>
         <div className={styles.today}>Subota, 17. listopada 2026.</div>
-        <button className={styles.profile}><span>V</span><span><strong>Valentina</strong><small>Koordinatorica sadržaja</small></span><ChevronDown size={16} /></button>
+        <div className={styles.profileWrap}>
+          <button className={styles.profile} onClick={() => setProfileMenu((open) => !open)} aria-expanded={profileMenu} aria-haspopup="menu">
+            <span>{roleMeta.initial}</span><span><strong>{activeRole}</strong><small>{roleMeta.title}</small></span><ChevronDown size={16} />
+          </button>
+          {profileMenu && <div className={styles.profileMenu} role="menu" aria-label="Odaberi profil">
+            <button role="menuitem" onClick={() => selectRole('Natalija')}><span>N</span><div><strong>Natalija</strong><small>Pregledava i odobrava</small></div>{activeRole === 'Natalija' && <Check />}</button>
+            <button role="menuitem" onClick={() => selectRole('Valentina')}><span>V</span><div><strong>Valentina</strong><small>Priprema i objavljuje</small></div>{activeRole === 'Valentina' && <Check />}</button>
+          </div>}
+        </div>
       </header>
 
+      {mobileNav && <button className={styles.mobileBackdrop} onClick={() => setMobileNav(false)} aria-label="Zatvori izbornik" />}
       <aside className={`${styles.sidebar} ${mobileNav ? styles.sidebarOpen : ''}`}>
         <button className={styles.closeNav} onClick={() => setMobileNav(false)} aria-label="Zatvori izbornik"><X /></button>
         <div className={styles.weekIntro}><span>VESPERA CONTENT OS</span><h2>Manje razmišljanja.<br />Više objavljenog.</h2></div>
@@ -182,14 +212,15 @@ export function ContentOS() {
           {navItems.map((item) => <button key={item.id} className={view === item.id ? styles.navActive : ''} onClick={() => { setView(item.id); setMobileNav(false); }}><item.icon /><span>{item.label}</span>{item.id === 'approvals' && pendingApprovals.length > 0 && <b>{pendingApprovals.length}</b>}</button>)}
         </nav>
         <div className={styles.sidebarBottom}>
-          <div className={styles.people}><span>N</span><div><strong>Natalija</strong><small>Vlasnica · odobrava</small></div></div>
-          <div className={styles.people}><span>V</span><div><strong>Valentina</strong><small>Priprema i objavljuje</small></div></div>
+          <span className={styles.roleLabel}>RADIM KAO</span>
+          <button className={`${styles.people} ${activeRole === 'Natalija' ? styles.personActive : ''}`} onClick={() => selectRole('Natalija')}><span>N</span><div><strong>Natalija</strong><small>Vlasnica · odobrava</small></div>{activeRole === 'Natalija' && <Check />}</button>
+          <button className={`${styles.people} ${activeRole === 'Valentina' ? styles.personActive : ''}`} onClick={() => selectRole('Valentina')}><span>V</span><div><strong>Valentina</strong><small>Priprema i objavljuje</small></div>{activeRole === 'Valentina' && <Check />}</button>
           <button><Settings /> Postavke sustava</button>
         </div>
       </aside>
 
       <section className={styles.workspace}>
-        {view === 'dashboard' && <DashboardView pendingApprovals={pendingApprovals.length} published={published.length} statuses={state.statuses} onCreate={() => { setSelected(activeGuideItem); setStep(1); setView('create'); }} onPlan={() => setView('plan')} onLibrary={() => setView('library')} onEducation={() => setView('education')} onSelect={selectItem} />}
+        {view === 'dashboard' && <DashboardView role={activeRole} pendingApprovals={pendingApprovals.length} published={published.length} statuses={state.statuses} onCreate={() => { setSelected(activeGuideItem); setStep(1); setView('create'); }} onPlan={() => setView('plan')} onApprovals={() => setView('approvals')} onLibrary={() => setView('library')} onEducation={() => setView('education')} onSelect={selectItem} />}
         {view === 'create' && <GuideView item={selected} step={step} setStep={setStep} status={selectedStatus} checkedShots={checkedShots} toggleShot={toggleShot} caption={draftCaption} setCaption={setDraftCaption} cta={draftCta} setCta={setDraftCta} copyCaption={copyCaption} copied={copied} setStatus={setStatus} analytics={state.analytics[selected.id]} setAnalytics={setAnalytics} onOpenPlan={() => setView('plan')} />}
         {view === 'ideas' && <IdeaStudio onUse={selectItem} />}
         {view === 'plan' && <PlanView items={filteredPlan} weeks={weeks} weekFilter={weekFilter} setWeekFilter={setWeekFilter} pillarFilter={pillarFilter} setPillarFilter={setPillarFilter} statuses={state.statuses} onSelect={selectItem} />}
@@ -203,16 +234,20 @@ export function ContentOS() {
   );
 }
 
-function DashboardView({ pendingApprovals, published, statuses, onCreate, onPlan, onLibrary, onEducation, onSelect }: {
+function DashboardView({ role, pendingApprovals, published, statuses, onCreate, onPlan, onApprovals, onLibrary, onEducation, onSelect }: {
+  role: ActiveRole;
   pendingApprovals: number; published: number; statuses: Record<string, ContentStatus>;
-  onCreate: () => void; onPlan: () => void; onLibrary: () => void; onEducation: () => void; onSelect: (item: ContentItem, step?: number) => void;
+  onCreate: () => void; onPlan: () => void; onApprovals: () => void; onLibrary: () => void; onEducation: () => void; onSelect: (item: ContentItem, step?: number) => void;
 }) {
   const nextPosts = contentPlan.slice(0, 4);
   const inProgress = [activeGuideItem, ...contentPlan].filter((item) => (statuses[item.id] ?? item.status) === 'U pripremi').length;
+  const isNatalija = role === 'Natalija';
+  const natalijaHasApprovals = pendingApprovals > 0;
+  const primaryAction = isNatalija ? (natalijaHasApprovals ? onApprovals : onPlan) : onCreate;
   return <div className={styles.dashboard}>
     <div className={styles.dashboardHero}>
-      <div><p>SUBOTA, 17. LISTOPADA</p><h1>Dobro jutro, Valentina.</h1><span>Danas imaš jedan jasan zadatak: dovrši primjer za fotelju. Sustav te vodi korak po korak.</span></div>
-      <button className={styles.heroAction} onClick={onCreate}><Sparkles /><span><small>DANAŠNJI ZADATAK</small><strong>Napravi objavu za fotelju</strong><em>5 koraka · oko 25 minuta</em></span><ArrowRight /></button>
+      <div><p>SUBOTA, 17. LISTOPADA</p><h1>Dobro jutro, {role}.</h1><span>{isNatalija ? (natalijaHasApprovals ? `Čeka te ${pendingApprovals} ${pendingApprovals === 1 ? 'objava' : 'objave'} za pregled. Sve činjenice i tekst su na jednom mjestu.` : 'Sve je pregledano. Možeš provjeriti plan za ovaj tjedan i vidjeti što Valentina priprema.') : 'Danas imaš jedan jasan zadatak: dovrši primjer za fotelju. Sustav te vodi korak po korak.'}</span></div>
+      <button className={styles.heroAction} onClick={primaryAction}>{isNatalija ? (natalijaHasApprovals ? <ClipboardCheck /> : <CalendarDays />) : <Sparkles />}<span><small>{isNatalija ? 'TVOJ PREGLED' : 'DANAŠNJI ZADATAK'}</small><strong>{isNatalija ? (natalijaHasApprovals ? 'Pregledaj objave za odobrenje' : 'Provjeri plan za ovaj tjedan') : 'Napravi objavu za fotelju'}</strong><em>{isNatalija ? (natalijaHasApprovals ? 'Provjeri činjenice · odobri ili vrati' : 'Datumi, teme i statusi objava') : '5 koraka · oko 25 minuta'}</em></span><ArrowRight /></button>
     </div>
 
     <section className={styles.dashboardStats} aria-label="Pregled sadržaja">

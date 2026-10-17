@@ -55,6 +55,9 @@ Datum provjere: 17. listopada 2026.
 - Provjeren je put generator → nova varijacija → vođeni proces; odabrana persona, kategorija, format i sadržaj pravilno se prenose u izradu objave.
 - Centar i generator provjereni su na 1440 × 1024 i 390 × 844.
 - Dodana je kratka edukacija o dosegu, spremanjima, dijeljenjima, komentarima i konkretnim upitima, uz jasnu odluku što ponoviti nakon svake vrste rezultata.
+- Mobilni dashboard je dodatno dotjeran za širinu od 390 px: smanjena je skala naslova, statistike i tjedne objave pretvorene su u jasne kartice, a bočni izbornik je kompaktniji i dobio je zatamnjenu pozadinu.
+- Natalija i Valentina sada su stvarni profili u zaglavlju i bočnom izborniku; odabrani profil mijenja pozdrav, opis uloge i glavnu radnju na dashboardu.
+- Mobilni izbornik zaključava pomicanje sadržaja dok je otvoren i zatvara se gumbom ili dodirom izvan izbornika.
 
 ## Rezultat
 
