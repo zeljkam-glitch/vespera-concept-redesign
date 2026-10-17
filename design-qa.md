@@ -61,6 +61,10 @@ Datum provjere: 17. listopada 2026.
 - „Postavke sustava” sada otvaraju stvarnu radnu stranicu: zadani profil, tjedni cilj, Natalijino odobrenje, podsjetnici i aktivni kanali spremaju se lokalno.
 - Tjedni cilj mijenja broj objava na dashboardu, zadani profil mijenja početni dashboard, a isključivanje odobrenja prilagođava četvrti korak izrade objave.
 - Stanje analitičkih integracija prikazano je bez nagađanja: ručni unos je označen kao aktivan, a Meta i Google povezivanje kao još nepovezano.
+- Dodan je modul „Oglasi i mjerenje” unutar Content OS-a s pregledom Google, Meta i ChatGPT kanala, planom testa od 60 dana i naknadnim šestotjednim ChatGPT eksperimentom.
+- Modul računa cijenu kvalitetnog upita i ROAS, razlikuje sve upite od kvalitetnih, dolazaka, ponuda i prodaje te za svaki kanal daje jednostavan sljedeći zaključak.
+- Evidencija upita bilježi izvor, kampanju, kategoriju namještaja, status i vrijednost, a podaci se spremaju lokalno na uređaju.
+- Dodana je kratka edukacija o ulozi svakog kanala, atribuciji kroz UTM, podatke platforme i pitanje u salonu te šest gotovih ideja za oglase.
 
 ## Rezultat
 

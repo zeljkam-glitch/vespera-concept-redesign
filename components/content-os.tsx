@@ -26,6 +26,7 @@ import {
   Menu,
   MessageCircle,
   MessageSquareText,
+  MousePointerClick,
   Send,
   Save,
   Share2,
@@ -36,9 +37,10 @@ import {
   X,
 } from 'lucide-react';
 import { activeGuideItem, contentPillars, contentPlan, furnitureExamples, publishingRules, toneRules, type ContentItem, type ContentStatus, type FurnitureExample } from '@/lib/content-os-data';
+import { AdsMeasurement } from './ads-measurement';
 import styles from './content-os.module.css';
 
-type View = 'dashboard' | 'create' | 'ideas' | 'plan' | 'library' | 'education' | 'approvals' | 'guidelines' | 'results' | 'settings';
+type View = 'dashboard' | 'create' | 'ideas' | 'plan' | 'library' | 'education' | 'approvals' | 'guidelines' | 'results' | 'ads' | 'settings';
 type ActiveRole = 'Valentina' | 'Natalija';
 type AnalyticsRecord = { reach: number; saves: number; shares: number; comments: number; clicks: number; inquiries: number; lesson: string };
 type StoredState = { statuses: Record<string, ContentStatus>; checkedShots: Record<string, number[]>; analytics: Record<string, AnalyticsRecord> };
@@ -56,6 +58,7 @@ const navItems: { id: View; label: string; icon: typeof CalendarDays }[] = [
   { id: 'approvals', label: 'Odobrenja', icon: ClipboardCheck },
   { id: 'guidelines', label: 'Brend pravila', icon: FileText },
   { id: 'results', label: 'Rezultati', icon: BarChart3 },
+  { id: 'ads', label: 'Oglasi i mjerenje', icon: MousePointerClick },
 ];
 
 const stepMeta = [
@@ -257,6 +260,7 @@ export function ContentOS() {
         {view === 'approvals' && <ApprovalView items={pendingApprovals} onSelect={selectItem} setStatus={setStatus} />}
         {view === 'guidelines' && <GuidelinesView />}
         {view === 'results' && <ResultsView published={published} analytics={state.analytics} statuses={state.statuses} onSelect={selectItem} />}
+        {view === 'ads' && <AdsMeasurement role={activeRole} />}
         {view === 'settings' && <SettingsView settings={systemSettings} setSettings={setSystemSettings} saved={settingsSaved} onSave={saveSystemSettings} onAnalytics={() => setView('results')} onEducation={() => setView('education')} />}
       </section>
     </main>
