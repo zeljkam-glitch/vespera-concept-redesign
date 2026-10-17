@@ -7,6 +7,7 @@ import {
   ArrowRight,
   Armchair,
   BarChart3,
+  Bell,
   Bookmark,
   BookOpen,
   CalendarDays,
@@ -21,10 +22,12 @@ import {
   GraduationCap,
   Images,
   LayoutList,
+  Link2,
   Menu,
   MessageCircle,
   MessageSquareText,
   Send,
+  Save,
   Share2,
   Settings,
   Sparkles,
@@ -35,10 +38,13 @@ import {
 import { activeGuideItem, contentPillars, contentPlan, furnitureExamples, publishingRules, toneRules, type ContentItem, type ContentStatus, type FurnitureExample } from '@/lib/content-os-data';
 import styles from './content-os.module.css';
 
-type View = 'dashboard' | 'create' | 'ideas' | 'plan' | 'library' | 'education' | 'approvals' | 'guidelines' | 'results';
+type View = 'dashboard' | 'create' | 'ideas' | 'plan' | 'library' | 'education' | 'approvals' | 'guidelines' | 'results' | 'settings';
 type ActiveRole = 'Valentina' | 'Natalija';
 type AnalyticsRecord = { reach: number; saves: number; shares: number; comments: number; clicks: number; inquiries: number; lesson: string };
 type StoredState = { statuses: Record<string, ContentStatus>; checkedShots: Record<string, number[]>; analytics: Record<string, AnalyticsRecord> };
+type SystemSettings = { defaultRole: ActiveRole; weeklyGoal: 2 | 3 | 4; approvalRequired: boolean; reminders: boolean; instagram: boolean; facebook: boolean };
+
+const defaultSystemSettings: SystemSettings = { defaultRole: 'Valentina', weeklyGoal: 3, approvalRequired: true, reminders: true, instagram: true, facebook: true };
 
 const navItems: { id: View; label: string; icon: typeof CalendarDays }[] = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutList },
@@ -100,6 +106,8 @@ export function ContentOS() {
   const [weekFilter, setWeekFilter] = useState<number | 'all'>('all');
   const [pillarFilter, setPillarFilter] = useState<string>('Sve teme');
   const [copied, setCopied] = useState(false);
+  const [settingsSaved, setSettingsSaved] = useState(false);
+  const [systemSettings, setSystemSettings] = useState<SystemSettings>(defaultSystemSettings);
   const [draftCaption, setDraftCaption] = useState(activeGuideItem.caption);
   const [draftCta, setDraftCta] = useState(activeGuideItem.cta);
   const [state, setState] = useState<StoredState>({ statuses: { [activeGuideItem.id]: activeGuideItem.status }, checkedShots: {}, analytics: {} });
@@ -114,6 +122,19 @@ export function ContentOS() {
         return () => window.cancelAnimationFrame(frame);
       } catch { /* keep safe defaults */ }
     }
+  }, []);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem('vespera-content-os-settings-v1');
+    if (!saved) return;
+    try {
+      const parsed = { ...defaultSystemSettings, ...JSON.parse(saved) } as SystemSettings;
+      const frame = window.requestAnimationFrame(() => {
+        setSystemSettings(parsed);
+        setActiveRole(parsed.defaultRole);
+      });
+      return () => window.cancelAnimationFrame(frame);
+    } catch { /* keep safe defaults */ }
   }, []);
 
   useEffect(() => {
@@ -183,6 +204,13 @@ export function ContentOS() {
     setView('dashboard');
   }
 
+  function saveSystemSettings() {
+    window.localStorage.setItem('vespera-content-os-settings-v1', JSON.stringify(systemSettings));
+    setActiveRole(systemSettings.defaultRole);
+    setSettingsSaved(true);
+    window.setTimeout(() => setSettingsSaved(false), 1800);
+  }
+
   const roleMeta = activeRole === 'Valentina'
     ? { initial: 'V', title: 'Koordinatorica sadržaja' }
     : { initial: 'N', title: 'Vlasnica · odobrava' };
@@ -215,13 +243,13 @@ export function ContentOS() {
           <span className={styles.roleLabel}>RADIM KAO</span>
           <button className={`${styles.people} ${activeRole === 'Natalija' ? styles.personActive : ''}`} onClick={() => selectRole('Natalija')}><span>N</span><div><strong>Natalija</strong><small>Vlasnica · odobrava</small></div>{activeRole === 'Natalija' && <Check />}</button>
           <button className={`${styles.people} ${activeRole === 'Valentina' ? styles.personActive : ''}`} onClick={() => selectRole('Valentina')}><span>V</span><div><strong>Valentina</strong><small>Priprema i objavljuje</small></div>{activeRole === 'Valentina' && <Check />}</button>
-          <button><Settings /> Postavke sustava</button>
+          <button className={view === 'settings' ? styles.navActive : ''} onClick={() => { setView('settings'); setMobileNav(false); }}><Settings /> Postavke sustava</button>
         </div>
       </aside>
 
       <section className={styles.workspace}>
-        {view === 'dashboard' && <DashboardView role={activeRole} pendingApprovals={pendingApprovals.length} published={published.length} statuses={state.statuses} onCreate={() => { setSelected(activeGuideItem); setStep(1); setView('create'); }} onPlan={() => setView('plan')} onApprovals={() => setView('approvals')} onLibrary={() => setView('library')} onEducation={() => setView('education')} onSelect={selectItem} />}
-        {view === 'create' && <GuideView item={selected} step={step} setStep={setStep} status={selectedStatus} checkedShots={checkedShots} toggleShot={toggleShot} caption={draftCaption} setCaption={setDraftCaption} cta={draftCta} setCta={setDraftCta} copyCaption={copyCaption} copied={copied} setStatus={setStatus} analytics={state.analytics[selected.id]} setAnalytics={setAnalytics} onOpenPlan={() => setView('plan')} />}
+        {view === 'dashboard' && <DashboardView role={activeRole} weeklyGoal={systemSettings.weeklyGoal} pendingApprovals={pendingApprovals.length} published={published.length} statuses={state.statuses} onCreate={() => { setSelected(activeGuideItem); setStep(1); setView('create'); }} onPlan={() => setView('plan')} onApprovals={() => setView('approvals')} onLibrary={() => setView('library')} onEducation={() => setView('education')} onSelect={selectItem} />}
+        {view === 'create' && <GuideView item={selected} step={step} setStep={setStep} status={selectedStatus} approvalRequired={systemSettings.approvalRequired} checkedShots={checkedShots} toggleShot={toggleShot} caption={draftCaption} setCaption={setDraftCaption} cta={draftCta} setCta={setDraftCta} copyCaption={copyCaption} copied={copied} setStatus={setStatus} analytics={state.analytics[selected.id]} setAnalytics={setAnalytics} onOpenPlan={() => setView('plan')} />}
         {view === 'ideas' && <IdeaStudio onUse={selectItem} />}
         {view === 'plan' && <PlanView items={filteredPlan} weeks={weeks} weekFilter={weekFilter} setWeekFilter={setWeekFilter} pillarFilter={pillarFilter} setPillarFilter={setPillarFilter} statuses={state.statuses} onSelect={selectItem} />}
         {view === 'library' && <LibraryView onUse={(example) => { setSelected(example); setDraftCaption(example.caption); setDraftCta(example.cta); setStep(1); setView('create'); }} />}
@@ -229,17 +257,18 @@ export function ContentOS() {
         {view === 'approvals' && <ApprovalView items={pendingApprovals} onSelect={selectItem} setStatus={setStatus} />}
         {view === 'guidelines' && <GuidelinesView />}
         {view === 'results' && <ResultsView published={published} analytics={state.analytics} statuses={state.statuses} onSelect={selectItem} />}
+        {view === 'settings' && <SettingsView settings={systemSettings} setSettings={setSystemSettings} saved={settingsSaved} onSave={saveSystemSettings} onAnalytics={() => setView('results')} onEducation={() => setView('education')} />}
       </section>
     </main>
   );
 }
 
-function DashboardView({ role, pendingApprovals, published, statuses, onCreate, onPlan, onApprovals, onLibrary, onEducation, onSelect }: {
+function DashboardView({ role, weeklyGoal, pendingApprovals, published, statuses, onCreate, onPlan, onApprovals, onLibrary, onEducation, onSelect }: {
   role: ActiveRole;
-  pendingApprovals: number; published: number; statuses: Record<string, ContentStatus>;
+  weeklyGoal: 2 | 3 | 4; pendingApprovals: number; published: number; statuses: Record<string, ContentStatus>;
   onCreate: () => void; onPlan: () => void; onApprovals: () => void; onLibrary: () => void; onEducation: () => void; onSelect: (item: ContentItem, step?: number) => void;
 }) {
-  const nextPosts = contentPlan.slice(0, 4);
+  const nextPosts = contentPlan.slice(0, weeklyGoal);
   const inProgress = [activeGuideItem, ...contentPlan].filter((item) => (statuses[item.id] ?? item.status) === 'U pripremi').length;
   const isNatalija = role === 'Natalija';
   const natalijaHasApprovals = pendingApprovals > 0;
@@ -251,7 +280,7 @@ function DashboardView({ role, pendingApprovals, published, statuses, onCreate, 
     </div>
 
     <section className={styles.dashboardStats} aria-label="Pregled sadržaja">
-      <article><span>Ovaj tjedan</span><strong>3</strong><small>planirane objave</small></article>
+      <article><span>Ovaj tjedan</span><strong>{weeklyGoal}</strong><small>planirane objave</small></article>
       <article><span>U pripremi</span><strong>{inProgress}</strong><small>otvorenih zadataka</small></article>
       <article><span>Čeka Nataliju</span><strong>{pendingApprovals}</strong><small>za provjeru činjenica</small></article>
       <article><span>Objavljeno</span><strong>{published}</strong><small>objava u sustavu</small></article>
@@ -428,8 +457,8 @@ function LibraryView({ onUse }: { onUse: (item: ContentItem) => void }) {
   </div>;
 }
 
-function GuideView({ item, step, setStep, status, checkedShots, toggleShot, caption, setCaption, cta, setCta, copyCaption, copied, setStatus, analytics, setAnalytics, onOpenPlan }: {
-  item: ContentItem; step: number; setStep: (step: number) => void; status: ContentStatus; checkedShots: number[]; toggleShot: (index: number) => void;
+function GuideView({ item, step, setStep, status, approvalRequired, checkedShots, toggleShot, caption, setCaption, cta, setCta, copyCaption, copied, setStatus, analytics, setAnalytics, onOpenPlan }: {
+  item: ContentItem; step: number; setStep: (step: number) => void; status: ContentStatus; approvalRequired: boolean; checkedShots: number[]; toggleShot: (index: number) => void;
   caption: string; setCaption: (value: string) => void; cta: string; setCta: (value: string) => void; copyCaption: () => void; copied: boolean;
   setStatus: (id: string, status: ContentStatus) => void; analytics?: AnalyticsRecord; setAnalytics: (id: string, field: keyof AnalyticsRecord, value: number | string) => void; onOpenPlan: () => void;
 }) {
@@ -459,7 +488,7 @@ function GuideView({ item, step, setStep, status, checkedShots, toggleShot, capt
         {step === 1 && <GoalStep item={item} />}
         {step === 2 && <ShootStep item={item} examples={examples} checkedShots={checkedShots} toggleShot={toggleShot} />}
         {step === 3 && <CopyStep item={item} caption={caption} setCaption={setCaption} cta={cta} setCta={setCta} copyCaption={copyCaption} copied={copied} />}
-        {step === 4 && <ApprovalStep item={item} status={status} setStatus={setStatus} />}
+        {step === 4 && <ApprovalStep item={item} status={status} approvalRequired={approvalRequired} setStatus={setStatus} />}
         {step === 5 && <PublishStep item={item} status={status} analytics={analytics} setAnalytics={setAnalytics} setStatus={setStatus} />}
       </section>
       <aside className={styles.guideAside}>
@@ -488,8 +517,8 @@ function CopyStep({ item, caption, setCaption, cta, setCta, copyCaption, copied 
   return <div className={styles.flowSection}><h2>Tekst je već pripremljen.</h2><p className={styles.lead}>Prilagodi samo potvrđene podatke. Zadrži jednu poruku i jedan poziv na akciju.</p><label className={styles.field}><span>HOOK / PRVA REČENICA</span><input value={item.hook} readOnly /></label><label className={styles.field}><span>TEKST OBJAVE</span><textarea value={caption} onChange={(event) => setCaption(event.target.value)} rows={9} /></label><label className={styles.field}><span>POZIV NA AKCIJU</span><input value={cta} onChange={(event) => setCta(event.target.value)} /></label><button className={styles.copyButton} onClick={copyCaption}>{copied ? <Check /> : <Copy />}{copied ? 'Kopirano' : 'Kopiraj tekst i CTA'}</button></div>;
 }
 
-function ApprovalStep({ item, status, setStatus }: { item: ContentItem; status: ContentStatus; setStatus: (id: string, status: ContentStatus) => void }) {
-  return <div className={styles.flowSection}><h2>Natalija treba provjeriti samo činjenice.</h2><p className={styles.lead}>Vizual, struktura i tekst su spremni. Označi podatke koji se moraju potvrditi na dan objave.</p><div className={styles.approvalBox}>{item.factsToConfirm.length ? item.factsToConfirm.map((fact) => <label key={fact}><input type="checkbox" /> <span>{fact}</span></label>) : <p>Nema dodatnih prodajnih podataka za potvrdu.</p>}</div><div className={styles.approvalSummary}><div><span>Tema</span><strong>{item.title}</strong></div><div><span>Datum</span><strong>{formatDate(item.date)}</strong></div><div><span>Status</span><strong>{status}</strong></div></div><button className={styles.largePrimary} onClick={() => setStatus(item.id, 'Čeka odobrenje')}><Send /> Pošalji Nataliji na odobrenje</button></div>;
+function ApprovalStep({ item, status, approvalRequired, setStatus }: { item: ContentItem; status: ContentStatus; approvalRequired: boolean; setStatus: (id: string, status: ContentStatus) => void }) {
+  return <div className={styles.flowSection}><h2>{approvalRequired ? 'Natalija treba provjeriti samo činjenice.' : 'Objava je spremna za završnu provjeru.'}</h2><p className={styles.lead}>{approvalRequired ? 'Vizual, struktura i tekst su spremni. Označi podatke koji se moraju potvrditi na dan objave.' : 'Odobrenje je isključeno u postavkama. Valentina može provjeriti podatke i nastaviti na objavu.'}</p><div className={styles.approvalBox}>{item.factsToConfirm.length ? item.factsToConfirm.map((fact) => <label key={fact}><input type="checkbox" /> <span>{fact}</span></label>) : <p>Nema dodatnih prodajnih podataka za potvrdu.</p>}</div><div className={styles.approvalSummary}><div><span>Tema</span><strong>{item.title}</strong></div><div><span>Datum</span><strong>{formatDate(item.date)}</strong></div><div><span>Status</span><strong>{status}</strong></div></div><button className={styles.largePrimary} onClick={() => setStatus(item.id, approvalRequired ? 'Čeka odobrenje' : 'Odobreno')}>{approvalRequired ? <Send /> : <CheckCircle2 />} {approvalRequired ? 'Pošalji Nataliji na odobrenje' : 'Označi spremno za objavu'}</button></div>;
 }
 
 function PublishStep({ item, status, analytics, setAnalytics, setStatus }: { item: ContentItem; status: ContentStatus; analytics?: AnalyticsRecord; setAnalytics: (id: string, field: keyof AnalyticsRecord, value: number | string) => void; setStatus: (id: string, status: ContentStatus) => void }) {
@@ -515,6 +544,56 @@ function ApprovalView({ items, onSelect, setStatus }: { items: ContentItem[]; on
 
 function GuidelinesView() {
   return <div className={styles.listPage}><div className={styles.pageHeading}><div><p>VALENTININ PRIRUČNIK</p><h1>Kako radimo sadržaj</h1><span>Ako nisi sigurna, slijedi ova pravila. Ne moraš izmišljati novi proces.</span></div></div><section className={styles.guideBook}><div><p>TJEDNI RITAM</p><h2>Jedno snimanje, cijeli tjedan sadržaja.</h2><ol><li><b>Ponedjeljak</b><span>Praktičan savjet koji ljudi spremaju.</span></li><li><b>Srijeda</b><span>Proizvod, funkcija ili kuhinjski detalj.</span></li><li><b>Petak</b><span>Salon, tim, realizacija ili konkretna ponuda.</span></li></ol></div><div><p>ŠEST PRAVILA</p><ul>{publishingRules.map((rule) => <li key={rule}><Check /> {rule}</li>)}</ul></div></section><section className={styles.pillars}><p>TEMATSKI STUPOVI</p>{contentPillars.map((pillar) => <article key={pillar.name}><strong>{pillar.share}</strong><h3>{pillar.name}</h3><span>{pillar.purpose}</span></article>)}</section><section className={styles.voiceGuide}><div className={styles.voiceIntro}><p>GLAS VESPERE</p><h2>Toplo, konkretno i bez pretjerivanja.</h2><span>Pišemo kao stručna osoba u salonu koja želi pomoći kupcu da donese mirnu odluku.</span><blockquote>“Ponesite mjere i fotografiju prostora. Zajedno ćemo provjeriti što odgovara vašem domu.”</blockquote></div><div className={styles.voiceRules}><div><p>KORISTIMO</p>{toneRules.use.map((rule, index) => <span key={rule}><b>{String(index + 1).padStart(2, '0')}</b>{rule}<Check /></span>)}</div><div><p>IZBJEGAVAMO</p>{toneRules.avoid.map((rule, index) => <span key={rule}><b>{String(index + 1).padStart(2, '0')}</b>{rule}<X /></span>)}</div></div></section></div>;
+}
+
+function SettingsView({ settings, setSettings, saved, onSave, onAnalytics, onEducation }: {
+  settings: SystemSettings; setSettings: (settings: SystemSettings) => void; saved: boolean; onSave: () => void; onAnalytics: () => void; onEducation: () => void;
+}) {
+  return <div className={styles.settingsPage}>
+    <div className={styles.settingsHeading}>
+      <div><p>POSTAVKE SUSTAVA</p><h1>Prilagodi način rada.</h1><span>Ove se postavke spremaju na ovom uređaju i odmah prilagođavaju dashboard.</span></div>
+      <button className={styles.settingsSave} onClick={onSave}>{saved ? <CheckCircle2 /> : <Save />}{saved ? 'Spremljeno' : 'Spremi postavke'}</button>
+    </div>
+
+    <div className={styles.settingsLayout}>
+      <section className={styles.settingsCard}>
+        <div className={styles.settingsCardHead}><span>01</span><div><p>POČETNI PROFIL</p><h2>Tko najčešće otvara alat?</h2></div></div>
+        <div className={styles.roleChoices}>
+          {(['Valentina', 'Natalija'] as ActiveRole[]).map((role) => <button key={role} className={settings.defaultRole === role ? styles.settingSelected : ''} onClick={() => setSettings({ ...settings, defaultRole: role })}><span>{role.slice(0, 1)}</span><div><strong>{role}</strong><small>{role === 'Valentina' ? 'Priprema i objavljuje' : 'Pregledava i odobrava'}</small></div>{settings.defaultRole === role && <Check />}</button>)}
+        </div>
+        <small className={styles.settingHelp}>Odabrani profil pojavit će se nakon svakog novog otvaranja aplikacije.</small>
+      </section>
+
+      <section className={styles.settingsCard}>
+        <div className={styles.settingsCardHead}><span>02</span><div><p>TJEDNI RITAM</p><h2>Koliko glavnih objava planiramo?</h2></div></div>
+        <div className={styles.goalChoices}>{([2, 3, 4] as const).map((goal) => <button key={goal} className={settings.weeklyGoal === goal ? styles.settingSelected : ''} onClick={() => setSettings({ ...settings, weeklyGoal: goal })}><strong>{goal}</strong><small>{goal === 2 ? 'mirniji ritam' : goal === 3 ? 'preporučeno' : 'pojačani ritam'}</small></button>)}</div>
+        <small className={styles.settingHelp}>Dashboard će prikazati isti broj sljedećih objava. Plan za tri mjeseca ostaje sačuvan.</small>
+      </section>
+
+      <section className={styles.settingsCard}>
+        <div className={styles.settingsCardHead}><span>03</span><div><p>TIJEK ODOBRAVANJA</p><h2>Kontrola prije objave</h2></div></div>
+        <label className={styles.settingToggle} aria-label="Natalijino odobrenje"><div><strong>Natalijino odobrenje</strong><small>Valentina šalje objavu na pregled prije objavljivanja.</small></div><input type="checkbox" checked={settings.approvalRequired} onChange={(event) => setSettings({ ...settings, approvalRequired: event.target.checked })} /><i /></label>
+        <label className={styles.settingToggle} aria-label="Podsjetnik nakon 48 sati"><div><strong>Podsjetnik nakon 48 sati</strong><small>Podsjeti Valentinu da prepiše rezultate objave.</small></div><input type="checkbox" checked={settings.reminders} onChange={(event) => setSettings({ ...settings, reminders: event.target.checked })} /><i /></label>
+      </section>
+
+      <section className={styles.settingsCard}>
+        <div className={styles.settingsCardHead}><span>04</span><div><p>KANALI</p><h2>Gdje Vespera objavljuje?</h2></div></div>
+        <label className={styles.settingToggle} aria-label="Instagram"><div><strong>Instagram</strong><small>Reel, karusel, fotografija i Story</small></div><input type="checkbox" checked={settings.instagram} onChange={(event) => setSettings({ ...settings, instagram: event.target.checked })} /><i /></label>
+        <label className={styles.settingToggle} aria-label="Facebook"><div><strong>Facebook</strong><small>Fotografije, video i poveznice</small></div><input type="checkbox" checked={settings.facebook} onChange={(event) => setSettings({ ...settings, facebook: event.target.checked })} /><i /></label>
+      </section>
+    </div>
+
+    <section className={styles.integrationSection}>
+      <div className={styles.integrationIntro}><p>ANALITIKA I POVEZIVANJA</p><h2>Što je povezano, a što unosimo ručno?</h2><span>Ovdje uvijek vidiš stvarno stanje. Sustav neće prikazivati automatske rezultate dok povezivanje nije napravljeno.</span></div>
+      <div className={styles.integrationGrid}>
+        <article><Database /><div><span className={styles.statusReady}>AKTIVNO</span><h3>Rezultati u Content OS-u</h3><p>Doseg, spremanja, dijeljenja, klikove i upite trenutačno unosite ručno za svaku objavu.</p></div><button onClick={onAnalytics}>Otvori rezultate <ArrowRight /></button></article>
+        <article><Bell /><div><span className={styles.statusLocal}>NA OVOM UREĐAJU</span><h3>Podsjetnici</h3><p>Postavka je spremljena, ali automatske e-mail i mobilne obavijesti još nisu povezane.</p></div><button onClick={onEducation}>Pogledaj postupak <ArrowRight /></button></article>
+        <article><Link2 /><div><span className={styles.statusPlanned}>NIJE POVEZANO</span><h3>Meta i Google analitika</h3><p>Za automatske brojke trebaju Meta API, Google Analytics i dozvole vlasnika računa.</p></div><button onClick={onEducation}>Kako sada mjerimo <ArrowRight /></button></article>
+      </div>
+    </section>
+
+    <div className={styles.mobileSettingsSave}><button onClick={onSave}>{saved ? <CheckCircle2 /> : <Save />}{saved ? 'Postavke su spremljene' : 'Spremi postavke'}</button></div>
+  </div>;
 }
 
 function ResultsView({ published, analytics, statuses, onSelect }: { published: ContentItem[]; analytics: Record<string, AnalyticsRecord>; statuses: Record<string, ContentStatus>; onSelect: (item: ContentItem, step?: number) => void }) {

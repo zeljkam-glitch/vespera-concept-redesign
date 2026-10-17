@@ -58,6 +58,9 @@ Datum provjere: 17. listopada 2026.
 - Mobilni dashboard je dodatno dotjeran za širinu od 390 px: smanjena je skala naslova, statistike i tjedne objave pretvorene su u jasne kartice, a bočni izbornik je kompaktniji i dobio je zatamnjenu pozadinu.
 - Natalija i Valentina sada su stvarni profili u zaglavlju i bočnom izborniku; odabrani profil mijenja pozdrav, opis uloge i glavnu radnju na dashboardu.
 - Mobilni izbornik zaključava pomicanje sadržaja dok je otvoren i zatvara se gumbom ili dodirom izvan izbornika.
+- „Postavke sustava” sada otvaraju stvarnu radnu stranicu: zadani profil, tjedni cilj, Natalijino odobrenje, podsjetnici i aktivni kanali spremaju se lokalno.
+- Tjedni cilj mijenja broj objava na dashboardu, zadani profil mijenja početni dashboard, a isključivanje odobrenja prilagođava četvrti korak izrade objave.
+- Stanje analitičkih integracija prikazano je bez nagađanja: ručni unos je označen kao aktivan, a Meta i Google povezivanje kao još nepovezano.
 
 ## Rezultat
 
