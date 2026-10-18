@@ -166,7 +166,7 @@ export function toCatalogProduct(product: AdminProduct, now = new Date()): Catal
     regularPrice: active ? product.promotion.referencePrice : undefined,
     price: active ? product.promotion.salePrice : product.price,
     discount: active ? product.promotion.label : undefined,
-    image: product.image,
+    image: product.slug === 'manila' && product.image === 'https://vespera.hr/wp-content/uploads/2026/07/1781691780_1781690676836_edit_338493474214675.png' ? '/manila-photo.jpeg' : product.image,
     status: product.status,
     features: product.features,
     href: product.href,

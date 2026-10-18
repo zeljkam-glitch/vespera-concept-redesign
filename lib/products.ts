@@ -23,7 +23,7 @@ export const catalogProducts: CatalogProduct[] = [
     regularPrice: '1.440,00 €',
     price: '1.152,00 €',
     discount: '−20%',
-    image: 'https://vespera.hr/wp-content/uploads/2026/07/1781691780_1781690676836_edit_338493474214675.png',
+    image: '/manila-photo.jpeg',
     status: 'Na zalihi',
     features: ['pomoćni ležaj', 'spremnik', 'za manji prostor'],
     href: '/proizvod/manila',
