@@ -480,6 +480,37 @@ export const publishingRules = [
 ];
 
 export const toneRules = {
-  use: ['jednostavan hrvatski', 'konkretne mjere i činjenice', 'topao i stručan ton', 'jasan sljedeći korak'],
-  avoid: ['najbolje i savršeno bez dokaza', 'neviđene cijene', 'više uskličnika', 'stručni žargon bez objašnjenja', 'rokovi i popusti bez potvrde'],
+  name: 'Nenad Vukušić TOV',
+  note: 'Vesperina radna interpretacija: jasno, ljudski, konkretno i s mjerom duhovito. Ne kopiramo osobu; primjenjujemo javno prepoznatljive komunikacijske principe na Vesperin glas.',
+  promise: 'Pišemo kao iskusan čovjek iz salona koji razumije stvarni problem kupca i zna ga objasniti bez reklamnog prenemaganja.',
+  use: [
+    'kreni od stvarne situacije kupca',
+    'jedna korisna misao po objavi',
+    'kratke rečenice i razgovoran hrvatski',
+    'činjenice, mjere i primjeri umjesto pridjeva',
+    'blaga dosjetka samo kada prirodno sjedne',
+    'jedan lagan i jasan sljedeći korak',
+  ],
+  avoid: [
+    'savršeno, premium i najbolje bez dokaza',
+    'rečenice koje zvuče kao letak ili oglas',
+    'forsirane šale i pametovanje',
+    'stručni žargon bez ljudskog objašnjenja',
+    'strah, pritisak i više uskličnika',
+    'cijene, rokovi i popusti bez potvrde',
+  ],
+  rewrites: [
+    {
+      before: 'Otkrijte savršenstvo vrhunske kvalitete za vaš dom.',
+      after: 'Kauč može stati u sobu i svejedno smetati. Zato prvo mjerimo prolaz, pa tek onda biramo model.',
+    },
+    {
+      before: 'Iskoristite nevjerojatnu ponudu koju ne smijete propustiti!',
+      after: 'Ovaj je model snižen do 31. listopada. U salonu ga možete sjesti, otvoriti i izmjeriti.',
+    },
+    {
+      before: 'Javite nam se za više informacija.',
+      after: 'Pošaljite fotografiju i tri osnovne mjere. Reći ćemo vam s čime ima smisla krenuti.',
+    },
+  ],
 };
