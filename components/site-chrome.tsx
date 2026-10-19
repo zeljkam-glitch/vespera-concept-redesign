@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Camera, Home, MapPin, Menu, MessageCircle, Phone, Search } from 'lucide-react';
+import { TextSizeControl } from './text-size-control';
 
 export function ConceptBar() {
   return <div className="concept-bar"><span>SALTY BRAND STUDIO</span><span>Konceptualni redizajn · nije službena Vespera stranica</span></div>;
@@ -18,6 +19,7 @@ export function Header() {
     <nav className="desktop-nav" aria-label="Glavna navigacija">
       <Link href="/namjestaj?akcija=da">Akcije</Link><Link className="available-now-link" href="/namjestaj?odmah=da">Dostupno odmah</Link><Link href="/namjestaj">Namještaj</Link><Link href="/kuhinje">Kuhinje po mjeri</Link><Link href="/vizualizator">Vizualni alati</Link><Link href="/blog">Savjeti</Link><Link href="/#salon-info">Salon</Link>
     </nav>
+    <TextSizeControl />
     <a className="header-phone" href="tel:+38547645535"><Phone size={20} aria-hidden="true" /> 047 645 535</a>
     <details className="mobile-menu">
       <summary aria-label="Otvori izbornik"><Menu size={27} aria-hidden="true" /></summary>

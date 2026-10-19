@@ -1,0 +1,58 @@
+.control {
+  margin: 0;
+  min-height: 44px;
+  padding: 4px;
+  display: inline-grid;
+  grid-template-columns: repeat(3, 40px);
+  align-items: center;
+  border: 1px solid #b9b9b3;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: 0 2px 10px rgba(21, 21, 21, .06);
+  isolation: isolate;
+}
+
+.control button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #34343c;
+  font: 850 15px/1 Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+
+.control button:last-of-type { font-size: 18px; }
+.control button:hover { background: #fff5a8; }
+.control button:focus-visible { outline: 3px solid #075fcc; outline-offset: 2px; }
+.control .active { background: #202236; color: #fff; }
+.control .active:hover { background: #202236; }
+
+@media (max-width: 920px) {
+  .siteControl {
+    position: fixed;
+    right: 14px;
+    bottom: 92px;
+    z-index: 80;
+    box-shadow: 0 5px 22px rgba(21, 21, 21, .2);
+  }
+}
+
+@media (max-width: 760px) {
+  .osControl {
+    position: fixed;
+    right: 14px;
+    bottom: 108px;
+    z-index: 80;
+    box-shadow: 0 5px 22px rgba(21, 21, 21, .2);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .control button { transition: background-color .16s ease, color .16s ease, transform .16s ease; }
+  .control button:active { transform: scale(.94); }
+}

@@ -38,6 +38,7 @@ import {
 } from 'lucide-react';
 import { activeGuideItem, contentPillars, contentPlan, furnitureExamples, publishingRules, toneRules, type ContentItem, type ContentStatus, type FurnitureExample } from '@/lib/content-os-data';
 import { AdsMeasurement } from './ads-measurement';
+import { TextSizeControl } from './text-size-control';
 import styles from './content-os.module.css';
 
 type View = 'dashboard' | 'create' | 'ideas' | 'plan' | 'library' | 'education' | 'approvals' | 'guidelines' | 'results' | 'ads' | 'settings';
@@ -224,6 +225,7 @@ export function ContentOS() {
         <button className={styles.mobileMenu} onClick={() => setMobileNav(true)} aria-label="Otvori izbornik"><Menu /></button>
         <div className={styles.wordmark}><Image src="/brand/vespera-logo-horizontal.svg" alt="Vespera namještaj" width={560} height={168} priority /><span>CONTENT OS</span></div>
         <div className={styles.today}>Subota, 17. listopada 2026.</div>
+        <TextSizeControl variant="os" />
         <div className={styles.profileWrap}>
           <button className={styles.profile} onClick={() => setProfileMenu((open) => !open)} aria-expanded={profileMenu} aria-haspopup="menu">
             <span>{roleMeta.initial}</span><span><strong>{activeRole}</strong><small>{roleMeta.title}</small></span><ChevronDown size={16} />
