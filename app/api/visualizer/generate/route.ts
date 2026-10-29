@@ -2,6 +2,7 @@ import { createHmac } from 'node:crypto';
 import { get, put } from '@vercel/blob';
 import { generateImage } from 'ai';
 import { getPublishedContent } from '@/lib/admin/content';
+import { featureFlags } from '@/lib/features';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -92,6 +93,10 @@ function publicError(error: unknown) {
 }
 
 export async function POST(request: Request) {
+  if (!featureFlags.aiRoomVisualizer) {
+    return Response.json({ error: 'AI vizualizator privremeno nije dostupan.' }, { status: 404 });
+  }
+
   try {
     const formData = await request.formData();
     const room = formData.get('room');
