@@ -287,7 +287,8 @@ h3 { line-height: 1.18; }
 .availability { width: fit-content; padding: 7px 10px; background: var(--accent); border: 1px solid var(--ink); font-size: .82rem; font-weight: 800; }
 .product-price { margin: 20px 0; padding: 20px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
 .product-price strong { display: block; font-size: 2.1rem; }
-.product-price span { color: var(--muted); font-size: .86rem; }
+.product-price span { color: var(--muted); font-size: 1rem; font-weight: 650; line-height: 1.6; }
+.product-price span s { margin: 0 .22em; display: inline-block; color: var(--ink); font-size: 1.35rem; font-weight: 900; text-decoration-thickness: 2px; text-decoration-color: #555550; }
 .source-warning { padding: 14px 16px; border-left: 4px solid var(--accent); background: #fff; color: #484844; }
 .privacy-copy { display: grid; gap: 12px; }
 .privacy-copy h2 { margin-top: 26px; }
@@ -854,6 +855,9 @@ h3 { line-height: 1.18; }
 .news-body > p:not(.news-meta), .payment-facts small { font-size: .9rem; }
 .status, .catalog-status { min-height: 38px; padding: 7px 11px; font-size: .84rem; }
 .anchor-price > span { font-size: .9rem; text-decoration: none; }
+.anchor-price s { color: var(--ink); font-size: 1.05rem; font-weight: 850; text-decoration-thickness: 2px; }
+.promo-prices span { font-size: .98rem; }
+.promo-prices s { color: #fff; font-size: 1.12rem; font-weight: 850; text-decoration-thickness: 2px; }
 .anchor-price small, .product-price small, .footer-payments p, .footer-note { font-size: .86rem; line-height: 1.55; }
 .catalog-help p, .catalog-hero aside p { font-size: .88rem; }
 
