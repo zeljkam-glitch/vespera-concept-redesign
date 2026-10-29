@@ -8,11 +8,11 @@ import type { CatalogProduct } from '@/lib/products';
 
 const featuredModels: Array<{ slug: string; image: string; aiModified?: boolean }> = [
   { slug: 'crafter', image: '/generated/crafter-carousel-ai-modified.jpg', aiModified: true },
-  { slug: 'lotos', image: 'https://vespera.hr/wp-content/uploads/2023/02/lotos-krevet-1170x707.png' },
-  { slug: 'remi', image: 'https://vespera.hr/wp-content/uploads/2026/04/remi-1140x1140.jpg' },
-  { slug: 'kent', image: 'https://vespera.hr/wp-content/uploads/2016/05/krevet-Kent.jpg' },
-  { slug: 'canon', image: 'https://vespera.hr/wp-content/uploads/2022/10/canon.jpg' },
-  { slug: 'sardinia', image: 'https://vespera.hr/wp-content/uploads/2020/06/Sardinia-krevet.jpg' },
+  { slug: 'lotos', image: '/generated/lotos-carousel-ai-modified.jpg', aiModified: true },
+  { slug: 'remi', image: '/generated/remi-carousel-ai-modified.jpg', aiModified: true },
+  { slug: 'kent', image: '/generated/kent-carousel-ai-modified.jpg', aiModified: true },
+  { slug: 'canon', image: '/generated/canon-carousel-ai-modified.jpg', aiModified: true },
+  { slug: 'sardinia', image: '/generated/sardinia-carousel-ai-modified.jpg', aiModified: true },
 ];
 
 export function PromoShowcase({ products }: { products: CatalogProduct[] }) {
