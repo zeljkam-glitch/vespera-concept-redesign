@@ -857,8 +857,8 @@ h3 { line-height: 1.18; }
 .status, .catalog-status { min-height: 38px; padding: 7px 11px; font-size: .84rem; }
 .anchor-price > span { font-size: .9rem; text-decoration: none; }
 .anchor-price s { color: var(--ink); font-size: 1.05rem; font-weight: 850; text-decoration-thickness: 2px; }
-.promo-prices span { font-size: .98rem; }
-.promo-prices s { color: #fff; font-size: 1.12rem; font-weight: 850; text-decoration-thickness: 2px; }
+.promo-prices span { display: flex; flex-wrap: wrap; align-items: baseline; gap: .35em; font-size: 1.05rem; font-weight: 700; }
+.promo-prices s { color: #fff; font-size: clamp(1.4rem, 1.7vw, 1.75rem); font-weight: 900; line-height: 1.2; text-decoration-thickness: 3px; text-decoration-color: #fff; }
 .anchor-price small, .product-price small, .footer-payments p, .footer-note { font-size: .86rem; line-height: 1.55; }
 .catalog-help p, .catalog-hero aside p { font-size: .88rem; }
 
