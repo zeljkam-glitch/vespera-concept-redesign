@@ -434,6 +434,8 @@ h3 { line-height: 1.18; }
 .promo-media { position: absolute; z-index: -2; inset: 0; overflow: hidden; background: #777771; }
 .promo-media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .promo-shade { position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, rgba(9,9,9,.88) 0%, rgba(9,9,9,.70) 34%, rgba(9,9,9,.15) 72%, rgba(9,9,9,.08) 100%); }
+.promo-ai-badge { min-height: 36px; padding: 5px 11px 5px 5px; display: inline-flex; align-items: center; gap: 7px; position: absolute; z-index: 3; top: 24px; right: 24px; background: rgba(255,255,255,.92); border: 1px solid rgba(20,20,18,.8); border-radius: 999px; color: var(--ink); font-size: .78rem; font-weight: 850; line-height: 1; box-shadow: 0 2px 12px rgba(0,0,0,.2); backdrop-filter: blur(5px); }
+.promo-ai-badge b { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: #fff; font-size: .7rem; }
 .promo-content { width: min(1280px, calc(100% - 160px)); min-height: 620px; margin-inline: auto; padding: 76px 0 88px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
 .promo-content .eyebrow { margin: 18px 0 12px; color: #fff; }
 .promo-content h2 { max-width: 650px; margin-bottom: 10px; color: #fff; font-size: clamp(2.7rem, 5vw, 5.2rem); text-wrap: balance; }
@@ -946,6 +948,7 @@ h3 { line-height: 1.18; }
   .promo-media img { object-position: 58% center; }
   .promo-shade { background: linear-gradient(0deg, rgba(9,9,9,.94) 0%, rgba(9,9,9,.79) 53%, rgba(9,9,9,.2) 100%); }
   .promo-content { width: 100%; min-height: 610px; padding: 210px 58px 82px; justify-content: flex-end; }
+  .promo-ai-badge { top: 14px; right: 14px; }
   .hero-copy h1 { font-size: clamp(2.75rem, 12vw, 4rem); }
   .promo-content h2 { font-size: clamp(2.25rem, 10vw, 3.4rem); }
   .promo-discount { min-width: 88px; min-height: 58px; font-size: 1.35rem; }
