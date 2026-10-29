@@ -22,9 +22,9 @@ function bed(product: Omit<CatalogProduct, 'room' | 'status'>): CatalogProduct {
 }
 
 // Podaci su prepisani iz javne kategorije KREVETI na vespera.hr na datum sourceCheckedAt.
-// Namjerno nema regularPrice/discount vrijednosti: javni izvor ne potvrđuje da je navedena
-// ranija cijena zakonita referentna cijena (najniža cijena u prethodnih 30 dana).
-export const catalogProducts: CatalogProduct[] = [
+// Cijena prije sniženja i postotak prenose se samo ondje gdje ih javni Vespera katalog
+// izričito objavljuje. Ne predstavljaju neovisnu potvrdu najniže cijene u prethodnih 30 dana.
+const baseCatalogProducts: CatalogProduct[] = [
   bed({ slug: 'crafter', name: 'Crafter', type: 'Boxspring krevet', dimensions: '200 × 160 cm', price: '1.512,00 €', image: 'https://vespera.hr/wp-content/uploads/2026/08/crafterkrevet_0-300x300.jpg', features: ['dostupne dimenzije 140 × 200, 180 × 200 i 200 × 200 cm', 'različite boje tkanine'], sourceUrl: 'https://vespera.hr/archives/9887' }),
   bed({ slug: 'enzo', name: 'Enzo', type: 'Boxspring krevet', dimensions: '200 × 160 cm', price: '1.312,00 €', image: 'https://vespera.hr/wp-content/uploads/2026/04/enzo-novi-300x300.jpg', features: ['dostupne dimenzije 140 × 200, 180 × 200 i 200 × 200 cm', 'različite boje i uzorci materijala'], sourceUrl: 'https://vespera.hr/archives/9721' }),
   bed({ slug: 'lotos', name: 'Lotos', type: 'Krevet', dimensions: '200 × 160 cm', price: '920,00 €', image: 'https://vespera.hr/wp-content/uploads/2023/02/lotos-krevet.png', features: ['dostupan i u dimenziji 200 × 180 cm'], sourceUrl: 'https://vespera.hr/archives/9707' }),
@@ -58,6 +58,31 @@ export const catalogProducts: CatalogProduct[] = [
   bed({ slug: 'sara', name: 'Sara', type: 'Krevet', dimensions: '200 × 140 cm', price: '510,00 €', image: 'https://vespera.hr/wp-content/uploads/2025/09/krevet-sara-300x300.jpg', features: ['kutija za posteljinu', 'madrac žičane jezgre', 'dostupan i u dimenzijama 200 × 160 i 200 × 180 cm', 'različite boje i tkanine'], sourceUrl: 'https://vespera.hr/archives/9731' }),
   bed({ slug: 'san', name: 'San', type: 'Krevet', dimensions: '200 × 150 cm', price: '490,00 €', image: 'https://vespera.hr/wp-content/uploads/2025/09/krevet-san-web-300x300.jpg', features: ['kutija za posteljinu', 'madrac žičane jezgre', 'različite boje i tkanine'], sourceUrl: 'https://vespera.hr/archives/9729' }),
 ];
+
+const sourceDiscounts: Record<string, Pick<CatalogProduct, 'regularPrice' | 'discount'>> = {
+  crafter: { regularPrice: '1.890,00 €', discount: '−20%' },
+  enzo: { regularPrice: '1.640,00 €', discount: '−20%' },
+  lotos: { regularPrice: '1.150,00 €', discount: '−20%' },
+  cruz: { regularPrice: '1.110,00 €', discount: '−20%' },
+  remi: { regularPrice: '1.100,00 €', discount: '−25%' },
+  marshall: { regularPrice: '1.730,00 €', discount: '−20%' },
+  como: { regularPrice: '1.370,00 €', discount: '−20%' },
+  melby: { regularPrice: '1.390,00 €', discount: '−20%' },
+  marbella: { regularPrice: '1.640,00 €', discount: '−20%' },
+  allure: { regularPrice: '1.980,00 €', discount: '−30%' },
+  oxford: { regularPrice: '1.740,00 €', discount: '−20%' },
+  oscar: { regularPrice: '1.640,00 €', discount: '−20%' },
+  castelo: { regularPrice: '1.284,00 €', discount: '−20%' },
+  bosco: { regularPrice: '1.419,00 €', discount: '−20%' },
+  orlando: { regularPrice: '685,00 €', discount: '−20%' },
+  kiki: { regularPrice: '870,00 €', discount: '−20%' },
+  dream: { regularPrice: '840,00 €', discount: '−30%' },
+};
+
+export const catalogProducts: CatalogProduct[] = baseCatalogProducts.map((product) => ({
+  ...product,
+  ...sourceDiscounts[product.slug],
+}));
 
 export const catalogSourceNote = `Javno dostupni podaci provjereni su na vespera.hr ${sourceCheckedAt} Dostupnost, konačnu izvedbu i cijenu potrebno je potvrditi u salonu.`;
 
