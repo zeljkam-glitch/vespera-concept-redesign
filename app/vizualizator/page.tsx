@@ -5,21 +5,22 @@ import { PageShell } from '@/components/site-chrome';
 import { KitchenPlanner } from '@/components/kitchen-planner';
 import { RoomVisualizer } from '@/components/room-visualizer';
 import { getPublishedContent } from '@/lib/admin/content';
+import { featureFlags } from '@/lib/features';
 
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Vizualni alati | Vespera namještaj',
-  description: 'Postavite Vesperin namještaj u fotografiju svog prostora ili pripremite osnovni nacrt kuhinje prije dolaska u salon.',
+  description: 'Pripremite osnovni 2D nacrt kuhinje prije dolaska u salon.',
 };
 
 export default async function VizualizatorPage() {
-  const content = await getPublishedContent();
+  const content = featureFlags.aiRoomVisualizer ? await getPublishedContent() : null;
 
   return <PageShell><main>
-    <section className="visualizer-hero planner-hero"><div className="container"><nav className="breadcrumbs" aria-label="Putanja"><Link href="/">Početna</Link><span aria-hidden="true">/</span><span>Vizualni alati</span></nav><p className="eyebrow">Besplatna priprema prije dolaska u salon</p><h1>Zamislite namještaj u svom prostoru.</h1><p className="lead">Učitajte fotografiju prostorije i postavite odabrani Vespera proizvod ili pripremite osnovni nacrt kuhinje. Oba alata služe kao polazište za razgovor sa savjetnikom.</p><div className="visualizer-tool-switch"><a href="#proizvod-u-prostoru"><Camera aria-hidden="true" /><span><strong>Proizvod u fotografiji</strong><small>Brza orijentacijska montaža</small></span></a><a href="#planer-kuhinje"><Grid3X3 aria-hidden="true" /><span><strong>Planer kuhinje</strong><small>Mjere, priključci i raspored</small></span></a></div></div></section>
+    <section className="visualizer-hero planner-hero"><div className="container"><nav className="breadcrumbs" aria-label="Putanja"><Link href="/">Početna</Link><span aria-hidden="true">/</span><span>Vizualni alati</span></nav><p className="eyebrow">Besplatna priprema prije dolaska u salon</p><h1>{featureFlags.aiRoomVisualizer ? 'Zamislite namještaj u svom prostoru.' : 'Isplanirajte osnovni nacrt svoje kuhinje.'}</h1><p className="lead">{featureFlags.aiRoomVisualizer ? 'Učitajte fotografiju prostorije i postavite odabrani Vespera proizvod ili pripremite osnovni nacrt kuhinje. Oba alata služe kao polazište za razgovor sa savjetnikom.' : 'Unesite mjere, označite vrata, prozore i priključke te složite osnovni raspored kuhinjskih elemenata prije razgovora sa savjetnikom.'}</p><div className={`visualizer-tool-switch${featureFlags.aiRoomVisualizer ? '' : ' visualizer-tool-switch-single'}`}>{featureFlags.aiRoomVisualizer && <a href="#proizvod-u-prostoru"><Camera aria-hidden="true" /><span><strong>Proizvod u fotografiji</strong><small>Brza orijentacijska montaža</small></span></a>}<a href="#planer-kuhinje"><Grid3X3 aria-hidden="true" /><span><strong>2D planer kuhinje</strong><small>Mjere, priključci i raspored</small></span></a></div></div></section>
 
-    <section className="section container visualizer-product-section" id="proizvod-u-prostoru"><div className="section-heading"><div><p className="eyebrow">AI vizualizacija prostora</p><h2>Pogledajte proizvod u svojoj prostoriji.</h2></div><p>Fotografirajte prostor i odaberite proizvod iz objavljene ponude. AI priprema novu fotografiju s prirodnijom perspektivom, svjetlom i sjenama.</p></div><RoomVisualizer products={content.products} /></section>
+    {featureFlags.aiRoomVisualizer && content && <section className="section container visualizer-product-section" id="proizvod-u-prostoru"><div className="section-heading"><div><p className="eyebrow">AI vizualizacija prostora</p><h2>Pogledajte proizvod u svojoj prostoriji.</h2></div><p>Fotografirajte prostor i odaberite proizvod iz objavljene ponude. AI priprema novu fotografiju s prirodnijom perspektivom, svjetlom i sjenama.</p></div><RoomVisualizer products={content.products} /></section>}
 
     <section className="visualizer-kitchen-section" id="planer-kuhinje"><div className="container"><div className="section-heading"><div><p className="eyebrow">Planiranje po mjeri</p><h2>Pripremite osnovni nacrt kuhinje.</h2></div><p>Unesite mjere, označite vrata i priključke te složite elemente u mjerilu. Planer ne provjerava nosivost zidova, instalacije ni mogućnost montaže.</p></div><KitchenPlanner /></div></section>
 
