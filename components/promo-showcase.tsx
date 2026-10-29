@@ -6,8 +6,8 @@ import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { CatalogProduct } from '@/lib/products';
 
-const featuredModels = [
-  { slug: 'crafter', image: 'https://vespera.hr/wp-content/uploads/2026/08/crafterkrevet_4-1140x641.jpg' },
+const featuredModels: Array<{ slug: string; image: string; aiModified?: boolean }> = [
+  { slug: 'crafter', image: '/generated/crafter-carousel-ai-modified.jpg', aiModified: true },
   { slug: 'lotos', image: 'https://vespera.hr/wp-content/uploads/2023/02/lotos-krevet-1170x707.png' },
   { slug: 'remi', image: 'https://vespera.hr/wp-content/uploads/2026/04/remi-1140x1140.jpg' },
   { slug: 'kent', image: 'https://vespera.hr/wp-content/uploads/2016/05/krevet-Kent.jpg' },
@@ -18,7 +18,7 @@ const featuredModels = [
 export function PromoShowcase({ products }: { products: CatalogProduct[] }) {
   const showcaseProducts = featuredModels.flatMap((featured) => {
     const product = products.find((item) => item.slug === featured.slug);
-    return product ? [{ ...product, showcaseImage: featured.image }] : [];
+    return product ? [{ ...product, showcaseImage: featured.image, aiModified: featured.aiModified ?? false }] : [];
   });
   const [active, setActive] = useState(0);
   const product = showcaseProducts[active];
@@ -32,6 +32,7 @@ export function PromoShowcase({ products }: { products: CatalogProduct[] }) {
         <Image key={product.showcaseImage} src={product.showcaseImage} alt={`${product.type} ${product.name}`} width={1680} height={900} sizes="100vw" priority />
       </div>
       <div className="promo-shade" aria-hidden="true" />
+      {product.aiModified && <span className="promo-ai-badge" aria-label="Fotografija prilagođena umjetnom inteligencijom"><b>AI</b> modified</span>}
       <div className="promo-content" aria-live="polite" aria-atomic="true">
         {product.discount && <span className="promo-discount">{product.discount}</span>}
         <p className="eyebrow">Izdvojeni model</p>
