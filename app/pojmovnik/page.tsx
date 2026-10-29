@@ -63,7 +63,7 @@ const groups = [
       { term: 'Po narudžbi', definition: 'Proizvod ili izvedba koju dobavljač priprema nakon potvrđene narudžbe.', why: 'Na pisanoj ponudi provjerite model, boju, materijal, dimenzije, cijenu i očekivani rok.' },
       { term: 'Ograničena količina', definition: 'Ponuda određenog broja komada koja se možda neće ponoviti nakon prodaje zalihe.', why: 'Ako vam proizvod odgovara, zatražite provjeru dostupnosti. Sličan model može doći kasnije, ali ne mora biti isti.' },
       { term: 'Sidrena ili referentna cijena', definition: 'Cijena koja kupcu služi kao polazište za usporedbu s aktualnom ponudom.', why: 'Na webu mora biti jasno što ta cijena predstavlja. Prije objave svako sniženje i usporednu cijenu treba provjeriti prema važećim pravilima.' },
-      { term: 'Najniža cijena u prethodnih 30 dana', definition: 'Referentni podatak koji se prikazuje uz određena oglašena sniženja.', why: 'Podatak mora odgovarati stvarnoj evidenciji cijena za konkretan proizvod. Demo cijene na ovom konceptu Vespera treba potvrditi prije objave.' },
+      { term: 'Najniža cijena u prethodnih 30 dana', definition: 'Referentni podatak koji se prikazuje uz određena oglašena sniženja.', why: 'Podatak mora odgovarati stvarnoj evidenciji cijena za konkretan proizvod. Ako evidencija nije potvrđena, referentna cijena i postotak sniženja ne objavljuju se.' },
       { term: 'Pisano potvrđena ponuda', definition: 'Dokument s dogovorenim proizvodom, izvedbom, cijenom, uslugama i drugim važnim stavkama.', why: 'Prije plaćanja provjerite jesu li navedeni svi dogovoreni detalji, rok te dostava i montaža ako ih trebate.' },
     ],
   },
