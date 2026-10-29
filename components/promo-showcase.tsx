@@ -33,14 +33,16 @@ export function PromoShowcase({ products }: { products: CatalogProduct[] }) {
       </div>
       <div className="promo-shade" aria-hidden="true" />
       <div className="promo-content" aria-live="polite" aria-atomic="true">
+        {product.discount && <span className="promo-discount">{product.discount}</span>}
         <p className="eyebrow">Izdvojeni model</p>
         <h2>{product.type} {product.name}</h2>
         <p className="promo-dimensions">{product.dimensions} · {product.status}</p>
         <div className="promo-prices">
+          {product.regularPrice && <span>Cijena prije sniženja prema izvornom katalogu <s>{product.regularPrice}</s></span>}
           <strong>{product.price}</strong>
         </div>
         <Link className="button button-accent" href={product.href ?? `/proizvod/${product.slug}`}>Pogledajte proizvod</Link>
-        <small>Objavljena cijena prenesena je s javne Vespera stranice. Konačnu cijenu i dostupnost potvrdite sa salonom.</small>
+        <small>Cijene i popust preneseni su s javne Vespera stranice. Konačnu cijenu i dostupnost potvrdite sa salonom.</small>
       </div>
       <button className="promo-arrow promo-arrow-left" type="button" onClick={() => go(-1)} aria-label="Prethodni izdvojeni proizvod"><ChevronLeft aria-hidden="true" /></button>
       <button className="promo-arrow promo-arrow-right" type="button" onClick={() => go(1)} aria-label="Sljedeći izdvojeni proizvod"><ChevronRight aria-hidden="true" /></button>
