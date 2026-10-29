@@ -88,9 +88,9 @@ const defaultTexts: SiteTexts = {
   heroEyebrow: 'Salon namještaja u Karlovcu od 2008.',
   heroTitle: 'Dobar namještaj počinje dobrim savjetom.',
   heroBody: 'Posjetite salon, isprobajte proizvode i razgovarajte s ljudima koji znaju pomoći.',
-  actionsEyebrow: 'Aktualne akcije',
-  actionsTitle: 'Jasna cijena. Ponuda koja se mijenja.',
-  actionsBody: 'Prikazujemo akcijsku i referentnu cijenu te status proizvoda. Dostupnost i izvedbu uvijek potvrdite sa salonom.',
+  actionsEyebrow: 'Aktualni katalog kreveta',
+  actionsTitle: '32 javno objavljena modela na jednom mjestu.',
+  actionsBody: 'Cijene i podaci preneseni su s javne Vespera stranice. Dostupnost, izvedbu i konačnu cijenu uvijek potvrdite sa salonom.',
 };
 
 function initialProduct(product: CatalogProduct): AdminProduct {
@@ -170,6 +170,8 @@ export function toCatalogProduct(product: AdminProduct, now = new Date()): Catal
     status: product.status,
     features: product.features,
     href: product.href,
+    sourceUrl: product.sourceUrl,
+    sourceNote: product.sourceNote,
   };
 }
 
@@ -177,6 +179,9 @@ export async function getPublishedContent() {
   const workspace = await getWorkspace();
   return {
     ...workspace.published,
-    products: workspace.published.products.map((product) => toCatalogProduct(product)),
+    // Javno prikazani katalog namjerno dolazi iz provjerenog izvornog skupa u kodu.
+    // Time stara Blob snimka s demo cijenama ne može ponovno objaviti nepotvrđene
+    // referentne cijene nakon deploya.
+    products: catalogProducts,
   };
 }

@@ -18,7 +18,7 @@ export default async function Home() {
       <section className="hero">
         <div className="hero-grid">
           <div className="hero-copy"><p className="eyebrow">{content.texts.heroEyebrow}</p><h1>{content.texts.heroTitle}</h1><p>{content.texts.heroBody}</p>
-            <div className="hero-actions"><Link className="button button-accent" href="/namjestaj?akcija=da">Pogledajte akcije <ArrowRight aria-hidden="true" /></Link><Link className="button button-light" href="/kuhinje">Planirajte kuhinju</Link></div>
+            <div className="hero-actions"><Link className="button button-accent" href="/namjestaj?prostorija=Spavaća+soba">Pogledajte krevete <ArrowRight aria-hidden="true" /></Link><Link className="button button-light" href="/kuhinje">Planirajte kuhinju</Link></div>
             <a className="text-link" href="tel:+38547645535"><Phone size={20} aria-hidden="true" /> Radije biste razgovarali? 047 645 535</a>
           </div>
           <div className="hero-image"><Image src="https://vespera.hr/wp-content/uploads/2026/06/ambijent-3-960x540.jpg" alt="Prostrana kutna garnitura u suvremenom dnevnom boravku" width={960} height={540} sizes="(max-width: 920px) 100vw, 50vw" priority /><div className="hero-badge">Od 2008. pomažemo urediti dom po stvarnim potrebama i budžetu.</div></div>
@@ -39,9 +39,9 @@ export default async function Home() {
       </section>
 
       <section className="section current-section" id="aktualno"><div className="container">
-        <div className="sale-heading"><div><p className="eyebrow">{content.texts.actionsEyebrow}</p><h2>{content.texts.actionsTitle}</h2></div><p>{content.texts.actionsBody}</p></div>
+        <div className="sale-heading"><div><p className="eyebrow">Aktualni katalog kreveta</p><h2>Javno objavljeni modeli na jednom mjestu.</h2></div><p>Cijene i podaci preneseni su s javne Vespera stranice. Dostupnost, izvedbu i konačnu cijenu uvijek potvrdite sa salonom.</p></div>
         <ActionCarousel products={content.products} />
-        <div className="action-catalog"><div><p className="eyebrow">Mjesečni katalog akcija</p><h3>Sve aktualne ponude na jednom mjestu.</h3><p>Katalog se redovito osvježava. Valentina ga u konačnoj verziji može zamijeniti bez pomoći programera.</p></div><Link className="button button-accent" href="/namjestaj?akcija=da">Otvorite akcijski katalog <ArrowRight aria-hidden="true" /></Link></div>
+        <div className="action-catalog"><div><p className="eyebrow">Cjenik za preuzimanje</p><h3>Svi preneseni modeli u strojno čitljivom obliku.</h3><p>CSV sadrži naziv, dimenzije, objavljenu cijenu i poveznicu na izvor. Konačnu cijenu provjerite prije kupnje.</p></div><a className="button button-accent" href="/cjenik-proizvoda.csv" download>Preuzmite CSV cjenik <ArrowRight aria-hidden="true" /></a></div>
       </div></section>
 
       <section className="kitchen-feature" id="kuhinje"><div className="kitchen-photo"><Image src="https://vespera.hr/wp-content/uploads/2026/06/csm_inspiration_stage_laser_412_3bd5d5fd87.jpg" alt="Moderna kuhinja planirana prema prostoru" width={1680} height={800} sizes="(max-width: 920px) 100vw, 55vw" /></div><div className="kitchen-copy"><p className="eyebrow">Kuhinje i namještaj po mjeri</p><h2>Od mjerenja do montaže, uz jednu jasnu ponudu.</h2><p>Besplatna izmjera i 3D prijedlog pomažu pripremiti rješenje prema prostoru, navikama i budžetu. 3D prijedlog nije izvedbeni nacrt, a točan rok, opseg usluge i cijena potvrđuju se prije narudžbe.</p><div className="process-list"><span>01 Besplatna izmjera prostora</span><span>02 Orijentacijski 3D prijedlog</span><span>03 Pisano potvrđeni rok i usluge</span></div><Link className="button button-dark" href="/kuhinje">Provjerite proces planiranja <ArrowRight aria-hidden="true" /></Link></div></section>
