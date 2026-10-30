@@ -39,7 +39,7 @@ export default async function Home() {
       </section>
 
       <section className="section current-section" id="aktualno"><div className="container">
-        <div className="sale-heading"><div><p className="eyebrow">Izdvojeni modeli</p><h2>Još proizvoda za usporedbu.</h2></div><p>Veliki karusel iznad rezerviran je za trenutačne akcije. Ovdje su izdvojeni redovni modeli, prikazani istim sustavom izvorne i jasno označene AI prilagođene fotografije.</p></div>
+        <div className="sale-heading"><div><p className="eyebrow">Aktualni popusti</p><h2>Akcijski modeli za usporedbu.</h2></div><p>Svaka kartica ima jednu jasnu fotografiju, vidljiv postotak popusta, prekriženu ranije objavljenu cijenu i istaknutu akcijsku cijenu.</p></div>
         <ActionCarousel products={content.products} />
         <div className="action-catalog"><div><p className="eyebrow">Cjenik za preuzimanje</p><h3>Svi preneseni modeli u strojno čitljivom obliku.</h3><p>CSV sadrži naziv, dimenzije, objavljenu cijenu i poveznicu na izvor. Konačnu cijenu provjerite prije kupnje.</p></div><a className="button button-accent" href="/cjenik-proizvoda.csv" download>Preuzmite CSV cjenik <ArrowRight aria-hidden="true" /></a></div>
       </div></section>
