@@ -32,7 +32,7 @@ export function PromoShowcase({ products }: { products: CatalogProduct[] }) {
         <h2>{product.type} {product.name}</h2>
         <p className="promo-dimensions">{product.dimensions} · {product.status}</p>
         <div className="promo-prices">
-          {product.regularPrice && <span>Cijena prije sniženja prema izvornom katalogu <s>{product.regularPrice}</s></span>}
+          {product.regularPrice && <span>Redovna cijena <s>{product.regularPrice}</s></span>}
           <strong>{product.price}</strong>
         </div>
         <Link className="button button-accent" href={product.href ?? `/proizvod/${product.slug}`}>Pogledajte proizvod</Link>
