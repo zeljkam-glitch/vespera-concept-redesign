@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Camera, CheckCircle2, Clock3, CreditCard, MapPin, MessageCircle, Phone, ShieldCheck, Truck } from 'lucide-react';
+import { ArrowRight, Camera, CheckCircle2, CirclePercent, Clock3, CreditCard, MapPin, MessageCircle, PackageOpen, Phone, ShieldCheck, Sofa, Truck } from 'lucide-react';
 import { PromoShowcase } from '@/components/promo-showcase';
 import { ActionCarousel } from '@/components/action-carousel';
 import { PageShell, SearchBox } from '@/components/site-chrome';
@@ -11,6 +11,18 @@ export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const content = await getPublishedContent();
+  const offerCounts = {
+    sales: content.products.filter((product) => product.discount && product.regularPrice).length,
+    available: content.products.filter((product) => product.status === 'Na zalihi' || product.status === 'Izložbeni primjerak').length,
+    showroom: content.products.filter((product) => product.status === 'Izložbeni primjerak').length,
+    lastChance: content.products.filter((product) => product.status === 'Izložbeni primjerak' && product.discount && product.regularPrice).length,
+  };
+  const offerLinks = [
+    { title: 'Akcije', copy: 'Objavljeni popusti s jasno prikazanom redovnom i akcijskom cijenom.', href: '/namjestaj?akcija=da', count: offerCounts.sales, icon: CirclePercent },
+    { title: 'Trenutno dostupno', copy: 'Proizvodi koje je salon potvrdio kao dostupne odmah ili izložene.', href: '/namjestaj?odmah=da', count: offerCounts.available, icon: PackageOpen },
+    { title: 'Izložbeni primjerci', copy: 'Konkretni komadi iz salona, uz provjeru stanja i uvjeta preuzimanja.', href: '/namjestaj?status=Izložbeni+primjerak', count: offerCounts.showroom, icon: Sofa },
+    { title: 'Posljednja prilika', copy: 'Sniženi izložbeni komadi dostupni samo dok se ne prodaju.', href: '/namjestaj?ponuda=posljednja', count: offerCounts.lastChance, icon: Clock3 },
+  ];
   return (
     <PageShell><main>
       <PromoShowcase products={content.products} />
@@ -30,6 +42,11 @@ export default async function Home() {
         <div><ShieldCheck aria-hidden="true" /><span><strong>Osobni savjet</strong> bez žurbe</span></div>
         <div><Truck aria-hidden="true" /><span><strong>Dostava i montaža</strong> prema dogovoru</span></div>
         <a className="trust-call" href="tel:+38547645535"><Clock3 aria-hidden="true" /><span><strong>Provjera dostupnosti</strong> 047 645 535</span></a>
+      </section>
+
+      <section className="section container offer-section" id="ponude">
+        <div className="section-head"><div><p className="eyebrow">Ponuda koja se mijenja</p><h2>Sve važne ponude ponovno na jednom mjestu.</h2></div><p>Broj proizvoda prikazuje samo potvrđene statuse. Kada salon označi novi izložbeni komad ili posljednju priliku, ovdje se pojavljuje automatski.</p></div>
+        <div className="offer-shortcuts">{offerLinks.map(({ title, copy, href, count, icon: Icon }) => <Link href={href} key={title}><Icon aria-hidden="true" /><span><strong>{title}</strong><small>{copy}</small><b>{count ? `${count} ${count === 1 ? 'proizvod' : 'proizvoda'}` : 'Čeka potvrdu salona'}</b></span><ArrowRight aria-hidden="true" /></Link>)}</div>
       </section>
 
       <section className="section container" id="kategorije">
