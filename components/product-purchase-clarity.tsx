@@ -19,7 +19,7 @@ export function ProductPurchaseClarity({ status, hasDiscount = false }: ProductP
       <article><span>01</span><h3>Na što se odnosi cijena?</h3><p>Na model i osnovnu ili prikazanu izvedbu opisanu na stranici. Druga dimenzija, boja, tkanina, materijal ili dodatna oprema mogu promijeniti cijenu.</p></article>
       <article><span>02</span><h3>Što cijena ne podrazumijeva?</h3><p>Dostava, unos, montaža, odvoz, uređaji i dekoracije uključeni su samo kada su izričito navedeni uz proizvod ili na pisanoj ponudi.</p></article>
       <article><span>03</span><h3>Što znači “{status}”?</h3><p>{statusDescriptions[status]}</p></article>
-      <article><span>04</span><h3>{hasDiscount ? 'Koliko traje akcija?' : 'Kada proizvod stiže?'}</h3><p>{hasDiscount ? 'Datum početka i završetka akcije te raspoloživa količina moraju biti navedeni uz konačnu objavu. Demo cijena na ovom konceptu nije prodajna ponuda.' : 'Za proizvod po narudžbi salon potvrđuje dobavljivost, odabranu izvedbu i očekivani rok te ih navodi na pisanoj ponudi.'}</p></article>
+      <article><span>04</span><h3>{hasDiscount ? 'Koliko traje akcija?' : 'Kada proizvod stiže?'}</h3><p>{hasDiscount ? 'Datum završetka akcije prikazuje se tek kada ga Vespera potvrdi. Ako datum nije naveden, prije narudžbe provjerite vrijede li još objavljena cijena i popust.' : 'Za proizvod po narudžbi salon potvrđuje dobavljivost, odabranu izvedbu i očekivani rok te ih navodi na pisanoj ponudi.'}</p></article>
     </div>
   </section>;
 }
