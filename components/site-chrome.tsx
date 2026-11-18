@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Camera, Home, MapPin, Menu, MessageCircle, Phone, Search } from 'lucide-react';
+import { Camera, Home, MapPin, MessageCircle, Phone, Search } from 'lucide-react';
+import { CatalogNavigation } from '@/components/catalog-navigation';
 import { NewsletterForm } from '@/components/newsletter-form';
 
 export function ConceptBar() {
@@ -16,14 +17,9 @@ export function Header() {
     <Link href="/" className="brand" aria-label="Vespera namještaj, početna">
       <Image src="/brand/vespera-logo-horizontal.svg" alt="Vespera namještaj" width={560} height={168} priority />
     </Link>
-    <nav className="desktop-nav" aria-label="Glavna navigacija">
-      <Link href="/namjestaj?prostorija=Spavaća+soba">Kreveti</Link><Link href="/namjestaj">Namještaj</Link><Link href="/kuhinje">Kuhinje po mjeri</Link><Link href="/vizualizator">Vizualni alati</Link><Link href="/blog">Savjeti</Link><Link href="/#salon-info">Salon</Link>
-    </nav>
+    <CatalogNavigation />
     <a className="header-phone" href="tel:+38547645535"><Phone size={20} aria-hidden="true" /> 047 645 535</a>
-    <details className="mobile-menu">
-      <summary aria-label="Otvori izbornik"><Menu size={27} aria-hidden="true" /></summary>
-      <nav aria-label="Mobilna navigacija"><Link href="/namjestaj?prostorija=Spavaća+soba">Kreveti</Link><Link href="/namjestaj">Namještaj po prostorijama</Link><Link href="/kuhinje">Kuhinje po mjeri</Link><Link href="/vizualizator">Vizualni alati</Link><Link href="/novosti">Novosti</Link><Link href="/blog">Savjeti prije kupnje</Link><Link href="/pojmovnik">Pojmovnik namještaja</Link><Link href="/informacije">Korisnički kutak</Link><a href="/cjenik-proizvoda.csv" download>CSV cjenik</a><Link href="/#salon">Salon i kontakt</Link></nav>
-    </details>
+    <CatalogNavigation mobile />
   </header></>;
 }
 

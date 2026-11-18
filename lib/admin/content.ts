@@ -7,6 +7,7 @@ import { catalogProducts, type CatalogProduct } from '@/lib/products';
 
 export type Promotion = {
   enabled: boolean;
+  showOnHomepage?: boolean;
   label: string;
   salePrice: string;
   referencePrice: string;
@@ -163,6 +164,7 @@ export function toCatalogProduct(product: AdminProduct, now = new Date()): Catal
     type: product.type,
     room: product.room,
     dimensions: product.dimensions,
+    fabricOptions: product.fabricOptions,
     regularPrice: active ? product.promotion.referencePrice : undefined,
     price: active ? product.promotion.salePrice : product.price,
     discount: active ? product.promotion.label : undefined,
@@ -175,13 +177,38 @@ export function toCatalogProduct(product: AdminProduct, now = new Date()): Catal
   };
 }
 
+const localDateTime = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
+const zagrebDateTime = new Intl.DateTimeFormat('sv-SE', {
+  timeZone: 'Europe/Zagreb',
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+});
+
 export async function getPublishedContent() {
   const workspace = await getWorkspace();
-  return {
-    ...workspace.published,
-    // Javno prikazani katalog namjerno dolazi iz provjerenog izvornog skupa u kodu.
-    // Time stara Blob snimka s demo cijenama ne može ponovno objaviti nepotvrđene
-    // referentne cijene nakon deploya.
-    products: catalogProducts,
-  };
+  const now = zagrebDateTime.format(new Date()).replace(' ', 'T');
+  const publishedBySlug = new Map(workspace.published.products.map((product) => [product.slug, product]));
+  const products = catalogProducts.map((product) => {
+    const published = publishedBySlug.get(product.slug);
+    if (!published || !workspace.publishedAt) return product;
+
+    const { enabled, showOnHomepage, startsAt, endsAt, label, salePrice, referencePrice } = published.promotion;
+    const datedPromotion = localDateTime.test(startsAt) && localDateTime.test(endsAt) && startsAt < endsAt;
+    const monthlyPromotion = enabled && showOnHomepage && datedPromotion && startsAt <= now && now < endsAt &&
+      Boolean(label && salePrice && referencePrice);
+
+    // Keep imported catalogue details. Only explicitly scheduled offers override its prices.
+    const base = { ...product, fabricOptions: published.fabricOptions };
+    if (monthlyPromotion) {
+      return { ...base, price: salePrice, regularPrice: referencePrice, discount: label, monthlyPromotion };
+    }
+    if (showOnHomepage && datedPromotion) {
+      return { ...base, regularPrice: undefined, discount: undefined, price: product.regularPrice ?? product.price };
+    }
+    return base;
+  });
+  return { ...workspace.published, products };
 }

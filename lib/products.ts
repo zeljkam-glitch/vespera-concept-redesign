@@ -1,8 +1,14 @@
+import { catalogHref } from '@/lib/catalog-navigation';
+
+export const catalogRooms = ['Dnevni boravak', 'Spavaća soba', 'Kuhinja', 'Blagovaonica', 'Predsoblja', 'Radna soba'] as const;
+
 export type CatalogProduct = {
   slug: string;
   name: string;
   type: string;
-  room: 'Dnevni boravak' | 'Spavaća soba' | 'Kuhinja';
+  room: (typeof catalogRooms)[number];
+  fabricOptions?: boolean;
+  monthlyPromotion?: boolean;
   dimensions: string;
   regularPrice?: string;
   price: string;
@@ -90,11 +96,7 @@ export const roomLinks = [
   { name: 'Dnevni boravak', description: 'Garniture, trosjedi, fotelje, regali i klub stolići', href: '/namjestaj?prostorija=Dnevni+boravak' },
   { name: 'Spavaća soba', description: 'Kreveti iz javno objavljenog Vespera kataloga', href: '/namjestaj?prostorija=Spavaća+soba' },
   { name: 'Kuhinja', description: 'Kuhinje po mjeri i gotovi blokovi', href: '/kuhinje' },
-  { name: 'Blagovaonica', description: 'Stolovi, stolice i kompleti za svakodnevni život', href: '/namjestaj?q=stolice' },
-  { name: 'Predsoblje', description: 'Cipelari, ormari, vješalice i ogledala', href: '/namjestaj?q=predsoblje' },
-  { name: 'Ured i radna soba', description: 'Radni stolovi, uredske stolice i odlaganje', href: '/namjestaj?q=ured' },
-];
-
-export const categoryGroups = [
-  { name: 'Spavaća soba', href: '/namjestaj?prostorija=Spavaća+soba', categories: ['Kreveti', 'Boxspring kreveti', 'Tapecirani kreveti'] },
+  { name: 'Blagovaonica', description: 'Stolovi, stolice i kompleti za svakodnevni život', href: catalogHref('Blagovaonica') },
+  { name: 'Predsoblje', description: 'Cipelari, ormari, vješalice i ogledala', href: catalogHref('Predsoblja') },
+  { name: 'Ured i radna soba', description: 'Radni stolovi, uredske stolice i odlaganje', href: catalogHref('Radna soba') },
 ];
