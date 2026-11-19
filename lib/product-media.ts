@@ -11,5 +11,4 @@ export function getAiLifestyleImage(slug: string) {
   return aiLifestyleImages[slug];
 }
 
-export const saleShowcaseSlugs = ['crafter', 'lotos', 'remi'];
 export const featuredModelSlugs = ['kent', 'canon', 'sardinia'];

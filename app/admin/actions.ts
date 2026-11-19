@@ -4,8 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { clearAdminSession, createAdminSession, isAdmin, validCredentials } from '@/lib/admin/session';
 import { getWorkspace, saveWorkspace, type AdminProduct, type MediaItem, type SiteTexts } from '@/lib/admin/content';
-
-const allowedRooms = ['Dnevni boravak', 'Spavaća soba', 'Kuhinja'] as const;
+import { catalogRooms as allowedRooms } from '@/lib/products';
 const allowedStatuses = ['Na zalihi', 'Po narudžbi', 'Izložbeni primjerak', 'Provjerite dostupnost'] as const;
 
 function text(formData: FormData, name: string, max = 500) {
@@ -72,6 +71,7 @@ export async function saveProductAction(formData: FormData) {
     name: text(formData, 'name', 140),
     type: text(formData, 'type', 140),
     room: allowedRooms.includes(roomValue as (typeof allowedRooms)[number]) ? roomValue as AdminProduct['room'] : 'Dnevni boravak',
+    fabricOptions: formData.get('fabricOptions') === 'on',
     dimensions: text(formData, 'dimensions', 140),
     price: text(formData, 'price', 80),
     image,
@@ -81,6 +81,7 @@ export async function saveProductAction(formData: FormData) {
     features: text(formData, 'features', 500).split(',').map((item) => item.trim()).filter(Boolean).slice(0, 12),
     href: text(formData, 'href', 240) || undefined,
     promotion: {
+      showOnHomepage: formData.get('showOnHomepage') === 'on',
       enabled: formData.get('promotionEnabled') === 'on',
       label: text(formData, 'promotionLabel', 30),
       salePrice: text(formData, 'salePrice', 80),

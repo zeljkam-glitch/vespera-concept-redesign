@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { AdminMediaUpload } from '@/components/admin-media-upload';
 import { deleteProductAction, publishAction, saveMediaAction, saveProductAction, saveTextsAction } from '@/app/admin/actions';
 import { getWorkspace, promotionState, type AdminProduct, type MediaItem } from '@/lib/admin/content';
+import { catalogRooms } from '@/lib/products';
 
 function dateForInput(value: string) {
   return value ? value.slice(0, 16) : '';
@@ -21,7 +22,7 @@ function ProductForm({ product, media }: { product?: AdminProduct; media: MediaI
         <label><span>Naziv</span><input name="name" defaultValue={product?.name} required /></label>
         <label><span>Slug / adresa</span><input name="slug" defaultValue={product?.slug} placeholder="npr. nova-garnitura" required /></label>
         <label><span>Vrsta proizvoda</span><input name="type" defaultValue={product?.type} required /></label>
-        <label><span>Prostorija</span><select name="room" defaultValue={product?.room ?? 'Dnevni boravak'}><option>Dnevni boravak</option><option>Spavaća soba</option><option>Kuhinja</option></select></label>
+        <label><span>Prostorija</span><select name="room" defaultValue={product?.room ?? 'Dnevni boravak'}>{catalogRooms.map((room) => <option key={room}>{room}</option>)}</select></label>
         <label><span>Dimenzije</span><input name="dimensions" defaultValue={product?.dimensions} /></label>
         <label><span>Redovna cijena</span><input name="price" defaultValue={product?.price} placeholder="1.250,00 €" required /></label>
         <label><span>Dostupnost</span><select name="status" defaultValue={product?.status ?? 'Provjerite dostupnost'}><option>Na zalihi</option><option>Po narudžbi</option><option>Izložbeni primjerak</option><option>Provjerite dostupnost</option></select></label>
@@ -29,8 +30,11 @@ function ProductForm({ product, media }: { product?: AdminProduct; media: MediaI
         <label className="admin-span-2"><span>Fotografija (HTTPS ili lokalna /media adresa)</span><input name="image" defaultValue={product?.image} list={`media-${id}`} required /><datalist id={`media-${id}`}>{media.map((item) => <option key={item.id} value={item.url}>{item.name}</option>)}</datalist></label>
         <label className="admin-span-2"><span>Opis fotografije</span><input name="imageAlt" defaultValue={product?.imageAlt} required /></label>
         <label className="admin-span-2"><span>Opis proizvoda</span><textarea name="description" defaultValue={product?.description} rows={3} /></label>
+        <label className="admin-checkbox"><input type="checkbox" name="fabricOptions" defaultChecked={product?.fabricOptions} /><span>Izbor boja i štofova</span></label>
         <fieldset className="admin-promotion admin-span-2"><legend>Akcija i automatski završetak</legend>
+          <p className="admin-span-2">Za prikaz na naslovnici unesite početak i završetak akcije prema vremenu u Hrvatskoj, obje cijene i oznaku popusta. Nakon spremanja objavite promjene.</p>
           <label className="admin-checkbox"><input type="checkbox" name="promotionEnabled" defaultChecked={product?.promotion.enabled} /><span>Uključi akciju</span></label>
+          <label className="admin-checkbox"><input type="checkbox" name="showOnHomepage" defaultChecked={product?.promotion.showOnHomepage} /><span>Prikaži u mjesečnim akcijama na naslovnici</span></label>
           <div className="admin-form-grid"><label><span>Oznaka popusta</span><input name="promotionLabel" defaultValue={product?.promotion.label} placeholder="−20%" /></label><label><span>Akcijska cijena</span><input name="salePrice" defaultValue={product?.promotion.salePrice} /></label><label><span>Referentna cijena</span><input name="referencePrice" defaultValue={product?.promotion.referencePrice} /></label><label><span>Početak</span><input name="startsAt" type="datetime-local" defaultValue={dateForInput(product?.promotion.startsAt ?? '')} /></label><label><span>Završetak</span><input name="endsAt" type="datetime-local" defaultValue={dateForInput(product?.promotion.endsAt ?? '')} /></label></div>
           <p>Po isteku završnog datuma proizvod automatski se vraća na redovnu cijenu i nestaje iz akcijskih prikaza.</p>
         </fieldset>

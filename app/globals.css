@@ -1426,3 +1426,28 @@ h3 { line-height: 1.18; }
   .admin-form-actions .button, .admin-delete { width: 100%; }
   .admin-preview-products { width: min(100% - 28px, 1280px); }
 }
+
+.desktop-navigation { margin-right: auto; }
+.mobile-navigation { display: none; }
+.desktop-nav { gap: clamp(8px, 1vw, 18px); }
+.nav-group { position: relative; }
+.nav-group > summary { display: flex; align-items: center; gap: 4px; min-height: 48px; cursor: pointer; list-style: none; }
+.nav-group > summary::-webkit-details-marker { display: none; }
+.nav-group[open] > summary svg { transform: rotate(180deg); }
+.nav-group-links { display: grid; min-width: 180px; }
+.desktop-nav .nav-group-links { position: absolute; top: 100%; left: 0; background: var(--white); border: 1px solid var(--ink); box-shadow: 5px 5px 0 var(--accent); white-space: nowrap; }
+.desktop-nav .nav-group-links a { padding-inline: 14px; }
+.kitchen-partner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 28px; padding-block: 28px; border-bottom: 1px solid var(--line); }
+.kitchen-partner h2 { margin: 0; font-size: clamp(1.15rem, 2vw, 1.55rem); }
+.kitchen-partner a { display: inline-flex; align-items: center; gap: 8px; text-decoration: underline; text-underline-offset: 4px; }
+.kitchen-partner img { width: min(280px, 100%); height: auto; }
+
+@media (max-width: 1180px) {
+  .desktop-navigation, .site-header .header-phone { display: none; }
+  .mobile-navigation, .mobile-menu { display: block; }
+  .site-header .brand { margin-right: auto; }
+  .mobile-menu nav { max-height: calc(100dvh - 155px); overflow-y: auto; }
+  .mobile-catalog-nav .nav-group > summary { width: auto; height: auto; min-height: 52px; display: flex; justify-content: space-between; padding: 12px; border: 0; border-bottom: 1px solid var(--line); font-weight: 750; }
+  .mobile-catalog-nav .nav-group-links { padding-left: 14px; border-left: 2px solid var(--accent); }
+}
+.fabric-options { display: inline-block; width: fit-content; padding: 4px 9px; border: 1px solid var(--line); border-radius: 4px; font-size: .83rem; font-weight: 750; }
