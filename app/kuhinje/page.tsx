@@ -22,7 +22,7 @@ export default function KuhinjePage() {
 
     <section className="container kitchen-partner" aria-labelledby="purion-title">
       <h2 id="purion-title"><a href="http://www.varia-purion.hr/">Purion kuhinje – proizvedeno u Njemačkoj <ArrowRight size={20} aria-hidden="true" /></a></h2>
-      <Image src="/brand/varia-purion.png" width={1088} height={116} alt="Varia Purion" />
+      <Image src="/brand/varia-purion.png" width={2139} height={207} alt="Varia Purion" />
     </section>
 
     <section className="container kitchen-boundaries" aria-labelledby="kitchen-boundaries-title"><div className="kitchen-boundaries-head"><p className="eyebrow">Što obećanje znači</p><h2 id="kitchen-boundaries-title">Jasno prije prvog koraka.</h2></div><div className="kitchen-boundaries-grid"><article><span>01</span><h3>Besplatna izmjera</h3><p>Izmjera služi pripremi Vesperina prijedloga. Područje dolaska, termin i uvjete usluge salon potvrđuje prije izlaska na teren.</p></article><article><span>02</span><h3>3D prijedlog</h3><p>Pomaže razumjeti raspored i izgled. Nije konačan izvedbeni nacrt niti potvrda da su sve instalacije i tehnički uvjeti provjereni.</p></article><article><span>03</span><h3>Okvirni rok</h3><p>Oko 30 dana je orijentacija, ne zajamčeni datum. Točan rok ovisi o potvrđenoj izvedbi, materijalima i dobavljivosti.</p></article><article><span>04</span><h3>Dostava i montaža</h3><p>Opseg i cijena navode se na ponudi. Priključivanje uređaja, demontaža, odvoz i priprema zidova ne podrazumijevaju se bez izričite potvrde.</p></article></div></section>
